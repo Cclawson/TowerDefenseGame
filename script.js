@@ -74,9 +74,6 @@ function handleComplete() {
     }, {
         src: "images/playButton.png",
         id: "playBtn"
-    }, {
-        src: "images/sprites.png",
-        id: "mySprites"
     }];
 
     loader = new createjs.LoadQueue(true, "assets/");

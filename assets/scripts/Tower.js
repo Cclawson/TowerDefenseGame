@@ -14,5 +14,3 @@ var Tower = (function () {
 
 var t = new Tower("", "bullet1", 10, 3);
 t.shootBullet();
-
-console.log("here");
