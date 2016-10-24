@@ -20,7 +20,9 @@
         backgroundScreen.visible = true;
         startTimer();
         startScore();
+        startLife();
         showMouseInfo();
+        showStore();
         gamestate = GAMESTATES.INGAME;
     }
 

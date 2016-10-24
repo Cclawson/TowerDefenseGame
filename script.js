@@ -2,8 +2,9 @@
     var CANVAS_WIDTH = 800;
     var FPS = 30;
     var titleScreen, backgroundScreen, instructionScreen, gameoverScreen;
+    var redTowerStore, greenTowerStore, blueTowerStore, store;
     var inBtn, menuBtn, playBtn
-    var timertext, scoretext;
+    var timertext, scoretext, lifetext;
     var score;
     var startTime;
     var gamestate;
@@ -50,6 +51,10 @@
         }, {
             src: "scripts/Round" + jsEnd
         }, {
+            src: "scripts/store" + jsEnd
+        },{
+            src: "scripts/life" + jsEnd
+        }, {
             src: "images/title.png",
             id: "title"
         }, {
@@ -73,6 +78,18 @@
         }, {
             src: "images/sprites.png",
             id: "mySprites"
+        },{
+            src: "images/redTower.png",
+            id: "redTower"
+        },{
+            src: "images/blueTower.png",
+            id: "blueTower"
+        },{
+            src: "images/greenTower.png",
+            id: "greenTower"
+        },{
+            src: "images/store.png",
+            id: "store"
         }];
 
         loader = new createjs.LoadQueue(true, "assets/");
