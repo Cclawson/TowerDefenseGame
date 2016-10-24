@@ -9,6 +9,22 @@ function buildAll() {
     menuBtn = new createjs.Bitmap(loader.getResult("menuBtn"));
     playBtn = new createjs.Bitmap(loader.getResult("playBtn"));
 
+    tower = new createjs.Bitmap(loader.getResult("tower"));
+    bullet = new createjs.Bitmap(loader.getResult("bullet"));
+
+    tower.x = 100;
+    tower.y = 100;
+
+    bullet.x = tower.x;
+    bullet.y = tower.y;
+
+    var b = new Bullet(bullet);
+
+    var t = new Tower(tower, b, 10, 6);
+
+    towers.push(t);
+
+    enemies.push(new Enemy());
 
     //Screens
     titleScreen.x = 0;
@@ -64,6 +80,10 @@ function buildAll() {
     mousetext.x = 50;
     mousetext.y = 100;
 
+    //tower
+    tower.x = 100;
+    tower.y = 100;
+
     //append to stage
     stage.addChild(titleScreen);
     stage.addChild(instructionScreen);
@@ -75,7 +95,7 @@ function buildAll() {
     stage.addChild(timertext);
     stage.addChild(scoretext);
     stage.addChild(mousetext);
-
+    stage.addChild(tower);
 
     hideAll();
     showTitle();

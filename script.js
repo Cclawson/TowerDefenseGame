@@ -2,8 +2,11 @@ var CANVAS_HEIGHT = 600;
 var CANVAS_WIDTH = 800;
 var FPS = 30;
 var titleScreen, backgroundScreen, instructionScreen, gameoverScreen;
-var inBtn, menuBtn, playBtn
+var inBtn, menuBtn, playBtn;
 var timertext, scoretext;
+var towers = [];
+var bullets = [];
+var enemies = [];
 var score;
 var startTime;
 var gamestate;
@@ -54,6 +57,12 @@ function handleComplete() {
         src: "scripts/Tower" + jsEnd
     },
     {
+        src: "scripts/Bullet" + jsEnd
+    },
+    {
+        src: "scripts/Enemy" + jsEnd
+    },
+    {
         src: "images/title.png",
         id: "title"
     }, {
@@ -74,7 +83,16 @@ function handleComplete() {
     }, {
         src: "images/playButton.png",
         id: "playBtn"
-    }];
+    },
+    {
+        src: "images/tower1.png",
+        id: "tower"
+    },
+    {
+        src: "images/bullet1.png",
+        id: "bullet"
+    }
+    ];
 
     loader = new createjs.LoadQueue(true, "assets/");
     loader.addEventListener("complete", handleComplete);
