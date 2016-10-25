@@ -115,7 +115,7 @@ function handleComplete() {
     },
     {
         src: "images/towerDefense_tile246.png",
-        id: "pathTile"
+        id: "enemySprite"
     }];
 
     loader = new createjs.LoadQueue(true, "assets/");
