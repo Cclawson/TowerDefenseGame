@@ -3,7 +3,7 @@ var CANVAS_WIDTH = 800;
 var FPS = 30;
 var titleScreen, backgroundScreen, instructionScreen, gameoverScreen;
 var inBtn, menuBtn, playBtn;
-var timertext, scoretext;
+var timertext, scoretext, mousetext;
 var towers = [];
 var bullets = [];
 var enemies = [];
@@ -63,24 +63,33 @@ function handleComplete() {
         src: "scripts/Enemy" + jsEnd
     },
     {
+        src: "scripts/PathList" + jsEnd
+    },
+    {
         src: "images/title.png",
         id: "title"
-    }, {
+    },
+    {
         src: "images/instruction.png",
         id: "instruction"
-    }, {
+    },
+    {
         src: "images/gameover.png",
         id: "gameover"
-    }, {
+    },
+    {
         src: "images/background.png",
         id: "bg"
-    }, {
+    },
+    {
         src: "images/inbutton.png",
         id: "inBtn"
-    }, {
+    },
+    {
         src: "images/menubutton.png",
         id: "menuBtn"
-    }, {
+    },
+    {
         src: "images/playButton.png",
         id: "playBtn"
     },
@@ -91,8 +100,23 @@ function handleComplete() {
     {
         src: "images/bullet1.png",
         id: "bullet"
-    }
-    ];
+    },
+    {
+        src: "images/sprites.png",
+        id: "mySprites"
+    },
+    {
+        src: "images/towerDefense_tile118.png",
+        id: "groundTile"
+    },
+    {
+        src: "images/towerDefense_tile157.png",
+        id: "pathTile"
+    },
+    {
+        src: "images/towerDefense_tile246.png",
+        id: "pathTile"
+    }];
 
     loader = new createjs.LoadQueue(true, "assets/");
     loader.addEventListener("complete", handleComplete);

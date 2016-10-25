@@ -1,8 +1,12 @@
+var map = [];
+var path = {};
+
 function buildAll() {
 
     titleScreen = new createjs.Bitmap(loader.getResult("title"));
     instructionScreen = new createjs.Bitmap(loader.getResult("instruction"));
     backgroundScreen = new createjs.Bitmap(loader.getResult("bg"));
+
     gameoverScreen = new createjs.Bitmap(loader.getResult("gameover"));
 
     inBtn = new createjs.Bitmap(loader.getResult("inBtn"));
@@ -88,6 +92,7 @@ function buildAll() {
     stage.addChild(titleScreen);
     stage.addChild(instructionScreen);
     stage.addChild(backgroundScreen);
+    buildMap();
     stage.addChild(gameoverScreen);
     stage.addChild(playBtn);
     stage.addChild(inBtn);
@@ -99,6 +104,34 @@ function buildAll() {
 
     hideAll();
     showTitle();
+}
+
+function buildMap() {
+    var groundTile = new createjs.Bitmap(loader.getResult("groundTile"));
+    var pathTile = new createjs.Bitmap(loader.getResult("pathTile"));
+    path = new PathList();
+
+    for (var i = 0; i < 9; i++) {
+        map[i] = [];
+        for (var j = 0; j < 9; j++) {
+            map[i][j] = {};
+            map[i][j] = groundTile.clone();
+            map[i][j].y = j * 64;
+            map[i][j].x = i * 64;
+            stage.addChild(map[i][j]);
+        }
+    }
+
+    let pathPoints = [[0, 1], [1, 1], [1, 2], [1, 3], [1, 4], [1, 5], [1, 6], [1, 7], [2, 7], [3, 7], [3, 6], [3, 5], [3, 4], [3, 3], [3, 2], [3, 1], [4, 1], [5, 1], [5, 2], [5, 3], [5, 4], [5, 5], [5, 6], [5, 7], [6, 7], [7, 7], [7, 6], [7, 5], [7, 4], [7, 3], [7, 2], [7, 1], [8, 1]];
+
+    for (var j = 0; j < pathPoints.length; j++) {
+        var nextTile = pathTile.clone();
+        nextTile.x = pathPoints[j][0] * 64;
+        nextTile.y = pathPoints[j][1] * 64;
+        path.add(nextTile);
+        stage.addChild(nextTile);
+    }
+
 }
 
 
