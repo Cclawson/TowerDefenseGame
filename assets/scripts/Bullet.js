@@ -24,7 +24,7 @@ var Bullet = (function () {
     };
 
     Bullet.prototype.update = function (enemy) {
-        var angle = Math.toDegrees(Math.atan(enemy.y / enemy.x));
+        var angle = toDegrees(Math.atan(enemy.y / enemy.x));
         if (self.active) {
             self.bulletBitmap.x += (self.xVelocity * 1) * Math.cos(Math.PI / 180 * angle);
             self.bulletBitmap.y += (self.yVelocity * 1) * Math.sin(Math.PI / 180 * angle);
@@ -38,6 +38,10 @@ var Bullet = (function () {
             self.active = true;
         }
     };
+
+    function toDegrees(angle) {
+        return angle * (180 / Math.PI);
+    }
 
     return Bullet;
 })();
