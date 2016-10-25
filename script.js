@@ -2,8 +2,10 @@ var CANVAS_HEIGHT = 600;
 var CANVAS_WIDTH = 800;
 var FPS = 30;
 var titleScreen, backgroundScreen, instructionScreen, gameoverScreen;
+var groundTile, pathTile;
+var redTowerStore, greenTowerStore, blueTowerStore, store;
 var inBtn, menuBtn, playBtn;
-var timertext, scoretext, mousetext;
+var timertext, scoretext, lifetext;
 var towers = [];
 var bullets = [];
 var enemies = [];
@@ -52,71 +54,71 @@ function handleComplete() {
         src: "scripts/Show" + jsEnd
     }, {
         src: "scripts/Round" + jsEnd
-    },
-    {
+    }, {
         src: "scripts/Tower" + jsEnd
-    },
-    {
+    }, {
         src: "scripts/Bullet" + jsEnd
-    },
-    {
+    }, {
         src: "scripts/Enemy" + jsEnd
-    },
-    {
+    }, {
+        src: "scripts/store" + jsEnd
+    }, {
+        src: "scripts/life" + jsEnd
+    }, {
         src: "scripts/PathList" + jsEnd
-    },
-    {
+    }, {
         src: "images/title.png",
         id: "title"
-    },
-    {
+    }, {
         src: "images/instruction.png",
         id: "instruction"
-    },
-    {
+    }, {
         src: "images/gameover.png",
         id: "gameover"
-    },
-    {
+    }, {
         src: "images/background.png",
         id: "bg"
-    },
-    {
+    }, {
         src: "images/inbutton.png",
         id: "inBtn"
-    },
-    {
+    }, {
         src: "images/menubutton.png",
         id: "menuBtn"
-    },
-    {
+    }, {
         src: "images/playButton.png",
         id: "playBtn"
-    },
-    {
+    }, {
         src: "images/tower1.png",
         id: "tower"
-    },
-    {
+    }, {
         src: "images/bullet1.png",
         id: "bullet"
-    },
-    {
+    }, {
         src: "images/sprites.png",
         id: "mySprites"
-    },
-    {
+    }, {
+        src: "images/redTower.png",
+        id: "redTower"
+    }, {
+        src: "images/blueTower.png",
+        id: "blueTower"
+    }, {
+        src: "images/greenTower.png",
+        id: "greenTower"
+    }, {
+        src: "images/store.png",
+        id: "store"
+    }, {
         src: "images/towerDefense_tile118.png",
         id: "groundTile"
-    },
-    {
+    }, {
         src: "images/towerDefense_tile157.png",
         id: "pathTile"
-    },
-    {
+    }, {
         src: "images/towerDefense_tile246.png",
         id: "enemySprite"
     }];
+
 
     loader = new createjs.LoadQueue(true, "assets/");
     loader.addEventListener("complete", handleComplete);

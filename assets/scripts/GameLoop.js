@@ -34,6 +34,14 @@ function checkMovement() {
     bullets.forEach(function (bullet) {
         bullet.update(enemies[0]);
     }, this);
+
+    enemies.forEach(function (enemy) {
+        enemy.x -= 4;
+
+        if (enemy.x <= 0) {
+            enemy.x = 500;
+        }
+    })
 }
 
 function startLoop() {

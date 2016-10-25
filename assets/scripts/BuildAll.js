@@ -30,6 +30,26 @@ function buildAll() {
 
     enemies.push(new Enemy());
 
+    greenTowerStore = new createjs.Bitmap(loader.getResult("greenTower"))
+    blueTowerStore = new createjs.Bitmap(loader.getResult("blueTower"))
+    redTowerStore = new createjs.Bitmap(loader.getResult("redTower"))
+    store = new createjs.Bitmap(loader.getResult("store"))
+    //store
+
+    store.x = 580;
+    store.y = 0;
+
+    redTowerStore.x = 585;
+    redTowerStore.y = 200;
+
+    blueTowerStore.x = 585;
+    blueTowerStore.y = 310;
+
+    greenTowerStore.x = 585;
+    greenTowerStore.y = 420;
+
+
+
     //Screens
     titleScreen.x = 0;
     titleScreen.y = 0;
@@ -77,8 +97,13 @@ function buildAll() {
     timertext.y = 50;
 
     scoretext = new createjs.Text("", "20px Arial", "#000");
-    scoretext.x = 650;
-    scoretext.y = 50;
+    scoretext.x = 600;
+    scoretext.y = 100;
+
+
+    lifetext = new createjs.Text("Life: 3", "20px Arial", "#000");
+    lifetext.x = 600;
+    lifetext.y = 50;
 
     mousetext = new createjs.Text("", "20px Arial", "#000");
     mousetext.x = 50;
@@ -98,17 +123,24 @@ function buildAll() {
     stage.addChild(inBtn);
     stage.addChild(menuBtn);
     stage.addChild(timertext);
-    stage.addChild(scoretext);
     stage.addChild(mousetext);
+    stage.addChild(store);
+    stage.addChild(scoretext);
+    stage.addChild(lifetext);
+    stage.addChild(redTowerStore);
+    stage.addChild(greenTowerStore);
+    stage.addChild(blueTowerStore);
     stage.addChild(tower);
+
+
 
     hideAll();
     showTitle();
 }
 
 function buildMap() {
-    var groundTile = new createjs.Bitmap(loader.getResult("groundTile"));
-    var pathTile = new createjs.Bitmap(loader.getResult("pathTile"));
+    groundTile = new createjs.Bitmap(loader.getResult("groundTile"));
+    pathTile = new createjs.Bitmap(loader.getResult("pathTile"));
     path = new PathList();
 
     for (var i = 0; i < 9; i++) {
@@ -122,7 +154,42 @@ function buildMap() {
         }
     }
 
-    let pathPoints = [[-1, 1], [0, 1], [1, 1], [1, 2], [1, 3], [1, 4], [1, 5], [1, 6], [1, 7], [2, 7], [3, 7], [3, 6], [3, 5], [3, 4], [3, 3], [3, 2], [3, 1], [4, 1], [5, 1], [5, 2], [5, 3], [5, 4], [5, 5], [5, 6], [5, 7], [6, 7], [7, 7], [7, 6], [7, 5], [7, 4], [7, 3], [7, 2], [7, 1], [8, 1]];
+    let pathPoints = [
+        [-1, 0],
+        [0, 1],
+        [1, 1],
+        [1, 2],
+        [1, 3],
+        [1, 4],
+        [1, 5],
+        [1, 6],
+        [1, 7],
+        [2, 7],
+        [3, 7],
+        [3, 6],
+        [3, 5],
+        [3, 4],
+        [3, 3],
+        [3, 2],
+        [3, 1],
+        [4, 1],
+        [5, 1],
+        [5, 2],
+        [5, 3],
+        [5, 4],
+        [5, 5],
+        [5, 6],
+        [5, 7],
+        [6, 7],
+        [7, 7],
+        [7, 6],
+        [7, 5],
+        [7, 4],
+        [7, 3],
+        [7, 2],
+        [7, 1],
+        [8, 1]
+    ];
 
     for (var j = 0; j < pathPoints.length; j++) {
         var nextTile = pathTile.clone();
@@ -140,8 +207,7 @@ function buildSprite() {
 
 }
 
-function displaySprites() {
-}
+function displaySprites() { }
 
 function hideAll() {
     instructionScreen.visible = false;
@@ -152,6 +218,28 @@ function hideAll() {
     gameoverScreen.visible = false;
     playBtn.visible = false;
     timertext.visible = false;
+    lifetext.visible = false;
     scoretext.visible = false;
     mousetext.visible = false;
+    blueTowerStore.visible = false;
+    redTowerStore.visible = false;
+    greenTowerStore.visible = false;
+    store.visible = false;
+    hideMap();
+}
+
+function hideMap() {
+    for (var i = 0; i < 9; i++) {
+        for (var j = 0; j < 9; j++) {
+            map[i][j].visible = false;
+        }
+    }
+}
+
+function showMap() {
+    for (var i = 0; i < 9; i++) {
+        for (var j = 0; j < 9; j++) {
+            map[i][j].visible = true;
+        }
+    }
 }
