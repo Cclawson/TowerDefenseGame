@@ -3,8 +3,9 @@ var CANVAS_WIDTH = 800;
 var FPS = 30;
 var titleScreen, backgroundScreen, instructionScreen, gameoverScreen;
 var groundTile, pathTile;
+var redTowerStore, greenTowerStore, blueTowerStore, store;
 var inBtn, menuBtn, playBtn;
-var timertext, scoretext, mousetext;
+var timertext, scoretext, lifetext;
 var towers = [];
 var bullets = [];
 var enemies = [];
@@ -60,6 +61,10 @@ function handleComplete() {
     }, {
         src: "scripts/Enemy" + jsEnd
     }, {
+        src: "scripts/store" + jsEnd
+    }, {
+        src: "scripts/life" + jsEnd
+    }, {
         src: "scripts/PathList" + jsEnd
     }, {
         src: "images/title.png",
@@ -92,6 +97,18 @@ function handleComplete() {
         src: "images/sprites.png",
         id: "mySprites"
     }, {
+        src: "images/redTower.png",
+        id: "redTower"
+    }, {
+        src: "images/blueTower.png",
+        id: "blueTower"
+    }, {
+        src: "images/greenTower.png",
+        id: "greenTower"
+    }, {
+        src: "images/store.png",
+        id: "store"
+    }, {
         src: "images/towerDefense_tile118.png",
         id: "groundTile"
     }, {
@@ -101,6 +118,7 @@ function handleComplete() {
         src: "images/towerDefense_tile246.png",
         id: "pathTile"
     }];
+
 
     loader = new createjs.LoadQueue(true, "assets/");
     loader.addEventListener("complete", handleComplete);

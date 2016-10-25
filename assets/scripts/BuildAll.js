@@ -30,6 +30,26 @@ function buildAll() {
 
     enemies.push(new Enemy());
 
+    greenTowerStore = new createjs.Bitmap(loader.getResult("greenTower"))
+    blueTowerStore = new createjs.Bitmap(loader.getResult("blueTower"))
+    redTowerStore = new createjs.Bitmap(loader.getResult("redTower"))
+    store = new createjs.Bitmap(loader.getResult("store"))
+    //store
+
+    store.x = 580;
+    store.y = 0;
+
+    redTowerStore.x = 585;
+    redTowerStore.y = 200;
+    
+    blueTowerStore.x=585;
+    blueTowerStore.y=310;
+
+    greenTowerStore.x=585;
+    greenTowerStore.y=420;
+
+
+
     //Screens
     titleScreen.x = 0;
     titleScreen.y = 0;
@@ -77,8 +97,13 @@ function buildAll() {
     timertext.y = 50;
 
     scoretext = new createjs.Text("", "20px Arial", "#000");
-    scoretext.x = 650;
-    scoretext.y = 50;
+    scoretext.x = 600;
+    scoretext.y = 100;
+
+
+    lifetext = new createjs.Text("Life: 3", "20px Arial", "#000");
+    lifetext.x = 600;
+    lifetext.y = 50; 
 
     mousetext = new createjs.Text("", "20px Arial", "#000");
     mousetext.x = 50;
@@ -98,9 +123,16 @@ function buildAll() {
     stage.addChild(inBtn);
     stage.addChild(menuBtn);
     stage.addChild(timertext);
-    stage.addChild(scoretext);
     stage.addChild(mousetext);
+    stage.addChild(store);
+    stage.addChild(scoretext);
+    stage.addChild(lifetext);
+    stage.addChild(redTowerStore);
+    stage.addChild(greenTowerStore);
+    stage.addChild(blueTowerStore);
     stage.addChild(tower);
+
+
 
     hideAll();
     showTitle();
@@ -184,8 +216,13 @@ function hideAll() {
     gameoverScreen.visible = false;
     playBtn.visible = false;
     timertext.visible = false;
+    lifetext.visible = false;
     scoretext.visible = false;
     mousetext.visible = false;
+    blueTowerStore.visible = false;
+    redTowerStore.visible = false;
+    greenTowerStore.visible = false;
+    store.visible = false;
     hideMap();
 }
 
