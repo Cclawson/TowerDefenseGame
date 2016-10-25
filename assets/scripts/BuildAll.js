@@ -107,8 +107,8 @@ function buildAll() {
 }
 
 function buildMap() {
-    var groundTile = new createjs.Bitmap(loader.getResult("groundTile"));
-    var pathTile = new createjs.Bitmap(loader.getResult("pathTile"));
+    groundTile = new createjs.Bitmap(loader.getResult("groundTile"));
+    pathTile = new createjs.Bitmap(loader.getResult("pathTile"));
     path = new PathList();
 
     for (var i = 0; i < 9; i++) {
@@ -122,7 +122,41 @@ function buildMap() {
         }
     }
 
-    let pathPoints = [[0, 1], [1, 1], [1, 2], [1, 3], [1, 4], [1, 5], [1, 6], [1, 7], [2, 7], [3, 7], [3, 6], [3, 5], [3, 4], [3, 3], [3, 2], [3, 1], [4, 1], [5, 1], [5, 2], [5, 3], [5, 4], [5, 5], [5, 6], [5, 7], [6, 7], [7, 7], [7, 6], [7, 5], [7, 4], [7, 3], [7, 2], [7, 1], [8, 1]];
+    let pathPoints = [
+        [0, 1],
+        [1, 1],
+        [1, 2],
+        [1, 3],
+        [1, 4],
+        [1, 5],
+        [1, 6],
+        [1, 7],
+        [2, 7],
+        [3, 7],
+        [3, 6],
+        [3, 5],
+        [3, 4],
+        [3, 3],
+        [3, 2],
+        [3, 1],
+        [4, 1],
+        [5, 1],
+        [5, 2],
+        [5, 3],
+        [5, 4],
+        [5, 5],
+        [5, 6],
+        [5, 7],
+        [6, 7],
+        [7, 7],
+        [7, 6],
+        [7, 5],
+        [7, 4],
+        [7, 3],
+        [7, 2],
+        [7, 1],
+        [8, 1]
+    ];
 
     for (var j = 0; j < pathPoints.length; j++) {
         var nextTile = pathTile.clone();
@@ -139,8 +173,7 @@ function buildSprite() {
 
 }
 
-function displaySprites() {
-}
+function displaySprites() {}
 
 function hideAll() {
     instructionScreen.visible = false;
@@ -153,4 +186,21 @@ function hideAll() {
     timertext.visible = false;
     scoretext.visible = false;
     mousetext.visible = false;
+    hideMap();
+}
+
+function hideMap() {
+    for (var i = 0; i < 9; i++) {
+        for (var j = 0; j < 9; j++) {
+            map[i][j].visible = false;
+        }
+    }
+}
+
+function showMap() {
+    for (var i = 0; i < 9; i++) {
+        for (var j = 0; j < 9; j++) {
+            map[i][j].visible = true;
+        }
+    }
 }
