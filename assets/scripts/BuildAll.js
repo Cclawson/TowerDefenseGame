@@ -15,9 +15,8 @@ function buildAll() {
 
     tower = new createjs.Bitmap(loader.getResult("tower"));
     bullet = new createjs.Bitmap(loader.getResult("bullet"));
+    enemySprite = new createjs.Bitmap(loader.getResult("enemySprite"));
 
-
-    enemies.push(new Enemy());
 
     greenTowerStore = new createjs.Bitmap(loader.getResult("greenTower"))
     blueTowerStore = new createjs.Bitmap(loader.getResult("blueTower"))
@@ -98,6 +97,8 @@ function buildAll() {
     mousetext.x = 50;
     mousetext.y = 100;
 
+
+
     //append to stage
     stage.addChild(titleScreen);
     stage.addChild(instructionScreen);
@@ -125,23 +126,8 @@ function buildMap() {
     pathTile = new createjs.Bitmap(loader.getResult("pathTile"));
     path = new PathList();
 
-    for (var i = 0; i < 9; i++) {
-        map[i] = [];
-        for (var j = 0; j < 9; j++) {
-            map[i][j] = {};
-            map[i][j] = groundTile.clone();
-            map[i][j].y = j * 64;
-            map[i][j].x = i * 64;
-            map[i][j].on("click", function (x, y) {
-                return function () {
-                    addTower(x * 64, y * 64);
-                }
-            } (i, j));
-            stage.addChild(map[i][j]);
-        }
-    }
-
     let pathPoints = [
+        [-1, 1],
         [0, 1],
         [1, 1],
         [1, 2],
@@ -177,6 +163,25 @@ function buildMap() {
         [8, 1]
     ];
 
+    for (var i = 0; i < 9; i++) {
+        map[i] = [];
+        for (var j = 0; j < 9; j++) {
+            if (pathPoints.indexOf([i, j]) < 0) {
+                map[i][j] = {};
+                map[i][j] = groundTile.clone();
+                map[i][j].y = j * 64;
+                map[i][j].x = i * 64;
+                map[i][j].on("click", function (x, y) {
+                    return function () {
+                        addTower(x * 64, y * 64);
+                    }
+                } (i, j));
+                stage.addChild(map[i][j]);
+
+            }
+        }
+    }
+
     for (var k = 0; k < pathPoints.length; k++) {
         var nextTile = pathTile.clone();
         nextTile.x = pathPoints[k][0] * 64;
@@ -184,9 +189,7 @@ function buildMap() {
         path.add(nextTile);
         stage.addChild(nextTile);
     }
-
 }
-
 
 function buildSprite() {
 

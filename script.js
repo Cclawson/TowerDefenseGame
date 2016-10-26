@@ -12,6 +12,10 @@ var enemies = [];
 var score;
 var startTime;
 var gamestate;
+var tickerRunning = false;
+var tickCount = 0;
+var enemyCount = 0;
+var ticksBetweenSpawns = 50;
 var GAMESTATES = {
     CONSTRUCT: 0,
     TITLE: 1,

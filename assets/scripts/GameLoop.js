@@ -12,10 +12,12 @@ function loop() {
             startGame();
             break;
         case GAMESTATES.INGAME:
+            tickerRunning = true;
             updateTimer();
             score += 1;
             scoretext.text = "Score: " + score;
             checkMovement();
+            enemyTick();
             break;
         case GAMESTATES.GAMEOVER:
             hideAll();
@@ -27,6 +29,62 @@ function loop() {
     }
 
     stage.update();
+}
+
+function spawnEnemy() {
+    let spawnedEnemy = new Enemy(enemySprite.clone(), 5, 4);
+    enemyCount++;
+    stage.addChild(spawnedEnemy.bitmap);
+    enemies.push(spawnedEnemy);
+}
+
+function moveEnemies() {
+    enemies.forEach(function (enemy) {
+        if (enemy.alive) {
+            moveToNext(enemy);
+
+        }
+    });
+}
+
+function moveToNext(enemy) {
+    if (enemy.currentNode.next) {
+        let newX = enemy.currentNode.next.data.x;
+        let newY = enemy.currentNode.next.data.y;
+        if (newY > enemy.bitmap.y) {
+            enemy.bitmap.y += enemy.speed;
+        } else if (newY < enemy.bitmap.y) {
+            enemy.bitmap.y -= enemy.speed;
+        }
+        if (newX > enemy.bitmap.x) {
+            enemy.bitmap.x += enemy.speed;
+        } else if (newX < enemy.bitmap.x) {
+            enemy.bitmap.x -= enemy.speed;
+        }
+        if (newY == enemy.bitmap.y && newX == enemy.bitmap.x) {
+            enemy.currentNode = enemy.currentNode.next;
+        }
+        stage.update();
+    } else {
+        stage.removeChild(enemy.bitmap);
+        enemy.alive = false;
+        //enemy reached end
+    }
+
+}
+
+function enemyTick() {
+    if (tickerRunning) {
+        if (tickCount % ticksBetweenSpawns == 0) {
+            //spawn enemy at initial square
+            //trigger moveToNext on enemy
+            //when it reaches the next tile, it will trigger itself to the next tile
+            if (enemyCount < 100) spawnEnemy();
+        }
+        moveEnemies();
+        stage.update();
+        tickCount++;
+    }
 }
 
 
