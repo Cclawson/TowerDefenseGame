@@ -60,7 +60,7 @@ function buildAll() {
     inBtn.x = 650;
     inBtn.y = 500;
 
-    inBtn.on("click", function(evt) {
+    inBtn.on("click", function (evt) {
         hideAll();
         showInstructions();
     });
@@ -69,7 +69,7 @@ function buildAll() {
     menuBtn.x = 650;
     menuBtn.y = 500;
 
-    menuBtn.on("click", function(evt) {
+    menuBtn.on("click", function (evt) {
         hideAll();
         showTitle();
     })
@@ -78,7 +78,7 @@ function buildAll() {
     playBtn.x = 530
     playBtn.y = 500;
 
-    playBtn.on("click", function(evt) {
+    playBtn.on("click", function (evt) {
         hideAll();
         gamestate = GAMESTATES.STARTGAME;
     })
@@ -104,10 +104,10 @@ function buildAll() {
 
 
     //append to stage
-    stage.addChild(titleScreen);
-    stage.addChild(instructionScreen);
     stage.addChild(backgroundScreen);
     buildMap();
+    stage.addChild(titleScreen);
+    stage.addChild(instructionScreen);
     stage.addChild(gameoverScreen);
     stage.addChild(playBtn);
     stage.addChild(inBtn);
@@ -175,11 +175,11 @@ function buildMap() {
                 map[i][j] = groundTile.clone();
                 map[i][j].y = j * 64;
                 map[i][j].x = i * 64;
-                map[i][j].on("click", function(x, y) {
-                    return function() {
+                map[i][j].on("click", function (x, y) {
+                    return function () {
                         addTower(x * 64, y * 64);
                     }
-                }(i, j));
+                } (i, j));
                 stage.addChild(map[i][j]);
 
             }
@@ -197,7 +197,7 @@ function buildMap() {
 
 function isPathPoint(i, j, pathPoints) {
     var isPathPoint = false;
-    pathPoints.forEach(function(point) {
+    pathPoints.forEach(function (point) {
         if (point[0] == i && point[1] == j) {
             isPathPoint = true;
         }
@@ -209,7 +209,7 @@ function buildSprite() {
 
 }
 
-function displaySprites() {}
+function displaySprites() { }
 
 function hideAll() {
     instructionScreen.visible = false;
@@ -228,13 +228,15 @@ function hideAll() {
     greenTowerStore.visible = false;
     store.visible = false;
     base.visible = false;
-    // hideMap();
+    hideMap();
 }
 
 function hideMap() {
     for (var i = 0; i < 9; i++) {
         for (var j = 0; j < 9; j++) {
-            map[i][j].visible = false;
+            if (map[i][j]) {
+                map[i][j].visible = false;
+            }
         }
     }
 }
@@ -242,7 +244,9 @@ function hideMap() {
 function showMap() {
     for (var i = 0; i < 9; i++) {
         for (var j = 0; j < 9; j++) {
-            map[i][j].visible = true;
+            if (map[i][j]) {
+                map[i][j].visible = true;
+            }
         }
     }
 }
