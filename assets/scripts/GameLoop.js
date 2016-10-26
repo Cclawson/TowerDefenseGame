@@ -30,7 +30,7 @@ function loop() {
 }
 
 function cleanUpTheDead() {
-    enemies.forEach(function(enemy) {
+    enemies.forEach(function (enemy) {
         if (!enemy.alive) stage.removeChild(enemy);
     });
 }
@@ -43,7 +43,7 @@ function spawnEnemy() {
 }
 
 function moveEnemies() {
-    enemies.forEach(function(enemy, index) {
+    enemies.forEach(function (enemy, index) {
         if (enemy.alive) {
             moveToNext(enemy);
 
@@ -106,11 +106,11 @@ function enemyTick() {
 
 
 function checkMovement() {
-    bullets.forEach(function(bullet) {
+    bullets.forEach(function (bullet) {
         bullet.update();
     }, this);
 
-    towers.forEach(function(tower) {
+    towers.forEach(function (tower) {
         tower.shootBullet();
     })
 
