@@ -15,7 +15,9 @@ function buildAll() {
 
     tower = new createjs.Bitmap(loader.getResult("tower"));
     bullet = new createjs.Bitmap(loader.getResult("bullet"));
+    enemySprite = new createjs.Bitmap(loader.getResult("enemySprite"));
 
+<<<<<<< HEAD
     tower.x = 100;
     tower.y = 100;
 
@@ -31,6 +33,8 @@ function buildAll() {
     towers.push(t);
 
     enemies.push(new Enemy());
+=======
+>>>>>>> 6980a01c92ee76d65ba08c8ec4e9cc5037fa8180
 
     greenTowerStore = new createjs.Bitmap(loader.getResult("greenTower"));
     blueTowerStore = new createjs.Bitmap(loader.getResult("blueTower"));
@@ -51,9 +55,12 @@ function buildAll() {
 
     greenTowerStore.x = 585;
     greenTowerStore.y = 420;
+<<<<<<< HEAD
 
     base.x = 520;
     base.y = 60;
+=======
+>>>>>>> 6980a01c92ee76d65ba08c8ec4e9cc5037fa8180
 
 
 
@@ -116,9 +123,7 @@ function buildAll() {
     mousetext.x = 50;
     mousetext.y = 100;
 
-    //tower
-    tower.x = 100;
-    tower.y = 100;
+
 
     //append to stage
     stage.addChild(titleScreen);
@@ -137,10 +142,13 @@ function buildAll() {
     stage.addChild(redTowerStore);
     stage.addChild(greenTowerStore);
     stage.addChild(blueTowerStore);
+<<<<<<< HEAD
     stage.addChild(tower);
     stage.addChild(base);
 
 
+=======
+>>>>>>> 6980a01c92ee76d65ba08c8ec4e9cc5037fa8180
 
     hideAll();
     showTitle();
@@ -151,18 +159,8 @@ function buildMap() {
     pathTile = new createjs.Bitmap(loader.getResult("pathTile"));
     path = new PathList();
 
-    for (var i = 0; i < 9; i++) {
-        map[i] = [];
-        for (var j = 0; j < 9; j++) {
-            map[i][j] = {};
-            map[i][j] = groundTile.clone();
-            map[i][j].y = j * 64;
-            map[i][j].x = i * 64;
-            stage.addChild(map[i][j]);
-        }
-    }
-
     let pathPoints = [
+        [-1, 1],
         [0, 1],
         [1, 1],
         [1, 2],
@@ -198,22 +196,39 @@ function buildMap() {
         [8, 1]
     ];
 
-    for (var j = 0; j < pathPoints.length; j++) {
+    for (var i = 0; i < 9; i++) {
+        map[i] = [];
+        for (var j = 0; j < 9; j++) {
+            if (pathPoints.indexOf([i, j]) < 0) {
+                map[i][j] = {};
+                map[i][j] = groundTile.clone();
+                map[i][j].y = j * 64;
+                map[i][j].x = i * 64;
+                map[i][j].on("click", function (x, y) {
+                    return function () {
+                        addTower(x * 64, y * 64);
+                    }
+                } (i, j));
+                stage.addChild(map[i][j]);
+
+            }
+        }
+    }
+
+    for (var k = 0; k < pathPoints.length; k++) {
         var nextTile = pathTile.clone();
-        nextTile.x = pathPoints[j][0] * 64;
-        nextTile.y = pathPoints[j][1] * 64;
+        nextTile.x = pathPoints[k][0] * 64;
+        nextTile.y = pathPoints[k][1] * 64;
         path.add(nextTile);
         stage.addChild(nextTile);
     }
-
 }
-
 
 function buildSprite() {
 
 }
 
-function displaySprites() {}
+function displaySprites() { }
 
 function hideAll() {
     instructionScreen.visible = false;
@@ -231,8 +246,12 @@ function hideAll() {
     redTowerStore.visible = false;
     greenTowerStore.visible = false;
     store.visible = false;
+<<<<<<< HEAD
     base.visible = false;
     // hideMap();
+=======
+    //  hideMap();
+>>>>>>> 6980a01c92ee76d65ba08c8ec4e9cc5037fa8180
 }
 
 function hideMap() {
@@ -249,4 +268,22 @@ function showMap() {
             map[i][j].visible = true;
         }
     }
+}
+
+function addTower(x, y) {
+    var tow = tower.clone();
+    tow.x = x;
+    tow.y = y;
+
+    var bull = bullet.clone();
+    bull.x = tow.x;
+    bull.y = tow.y;
+
+    var b = new Bullet(bull);
+
+    var t = new Tower(tow, b, 10, 6);
+
+    stage.addChild(tow);
+
+    towers.push(t);
 }
