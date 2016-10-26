@@ -18,6 +18,7 @@
 
     function startGame() {
         backgroundScreen.visible = true;
+        showBase();
         startTimer();
         startScore();
         startLife();
@@ -28,4 +29,8 @@
 
     function showMouseInfo() {
         mousetext.visible = true;
+    }
+
+    function showBase() {
+        base.visible = true;
     }

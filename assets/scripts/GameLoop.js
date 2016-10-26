@@ -14,8 +14,7 @@ function loop() {
         case GAMESTATES.INGAME:
             tickerRunning = true;
             updateTimer();
-            score += 1;
-            scoretext.text = "Score: " + score;
+            updateScore();
             checkMovement();
             enemyTick();
             break;
@@ -95,11 +94,11 @@ function enemyTick() {
 
 
 function checkMovement() {
-    bullets.forEach(function (bullet) {
+    bullets.forEach(function(bullet) {
         bullet.update(enemies[0]);
     }, this);
 
-    enemies.forEach(function (enemy) {
+    enemies.forEach(function(enemy) {
         enemy.x -= 4;
 
         if (enemy.x <= 0) {

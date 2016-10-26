@@ -17,11 +17,31 @@ function buildAll() {
     bullet = new createjs.Bitmap(loader.getResult("bullet"));
     enemySprite = new createjs.Bitmap(loader.getResult("enemySprite"));
 
+<<<<<<< HEAD
+    tower.x = 100;
+    tower.y = 100;
 
-    greenTowerStore = new createjs.Bitmap(loader.getResult("greenTower"))
-    blueTowerStore = new createjs.Bitmap(loader.getResult("blueTower"))
-    redTowerStore = new createjs.Bitmap(loader.getResult("redTower"))
-    store = new createjs.Bitmap(loader.getResult("store"))
+    bullet.x = tower.x;
+    bullet.y = tower.y;
+
+    var b = new Bullet(bullet);
+
+    var t = new Tower(tower, b, 10, 6);
+
+
+
+    towers.push(t);
+
+    enemies.push(new Enemy());
+=======
+>>>>>>> 6980a01c92ee76d65ba08c8ec4e9cc5037fa8180
+
+    greenTowerStore = new createjs.Bitmap(loader.getResult("greenTower"));
+    blueTowerStore = new createjs.Bitmap(loader.getResult("blueTower"));
+    redTowerStore = new createjs.Bitmap(loader.getResult("redTower"));
+    store = new createjs.Bitmap(loader.getResult("store"));
+    base = new createjs.Bitmap(loader.getResult("base"));
+
     //store
 
     store.x = 580;
@@ -35,6 +55,12 @@ function buildAll() {
 
     greenTowerStore.x = 585;
     greenTowerStore.y = 420;
+<<<<<<< HEAD
+
+    base.x = 520;
+    base.y = 60;
+=======
+>>>>>>> 6980a01c92ee76d65ba08c8ec4e9cc5037fa8180
 
 
 
@@ -116,6 +142,13 @@ function buildAll() {
     stage.addChild(redTowerStore);
     stage.addChild(greenTowerStore);
     stage.addChild(blueTowerStore);
+<<<<<<< HEAD
+    stage.addChild(tower);
+    stage.addChild(base);
+
+
+=======
+>>>>>>> 6980a01c92ee76d65ba08c8ec4e9cc5037fa8180
 
     hideAll();
     showTitle();
@@ -224,7 +257,8 @@ function hideAll() {
     redTowerStore.visible = false;
     greenTowerStore.visible = false;
     store.visible = false;
-    //hideMap();
+    base.visible = false;
+    //  hideMap();
 }
 
 function hideMap() {
