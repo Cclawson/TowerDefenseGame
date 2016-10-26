@@ -171,6 +171,7 @@ function buildMap() {
         map[i] = [];
         for (var j = 0; j < 9; j++) {
             if (!isPathPoint(i, j, pathPoints)) {
+                console.log(i, j);
                 map[i][j] = {};
                 map[i][j] = groundTile.clone();
                 map[i][j].y = j * 64;

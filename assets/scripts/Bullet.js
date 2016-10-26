@@ -19,7 +19,9 @@ Bullet.prototype.draw = function () {
     }
 };
 
-Bullet.prototype.update = function (enemy) {
+Bullet.prototype.update = function () {
+    var enemyobj = enemies[0];
+    var enemy = enemyobj.bitmap;
     var angle = Math.atan2(enemy.y - this.bulletBitmap.y, enemy.x - this.bulletBitmap.x);
     angle = toDegrees(angle);
     if (this.active) {
@@ -35,6 +37,11 @@ Bullet.prototype.update = function (enemy) {
 
 
     if (!this.inBounds() || collision) {
+        enemyobj.health -= 1;
+        if (enemyobj.health <= 0) {
+            stage.removeChild(enemy);
+            enemyobj.alive = false;
+        }
         this.bulletBitmap.x = this.startX;
         this.bulletBitmap.y = this.startY;
         this.active = true;

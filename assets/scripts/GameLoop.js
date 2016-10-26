@@ -44,10 +44,13 @@ function spawnEnemy() {
 }
 
 function moveEnemies() {
-    enemies.forEach(function (enemy) {
+    enemies.forEach(function (enemy, index) {
         if (enemy.alive) {
             moveToNext(enemy);
 
+        } else {
+            console.log("herr");
+            enemies.splice(index, 1);
         }
     });
 }
@@ -94,11 +97,11 @@ function enemyTick() {
 
 
 function checkMovement() {
-    bullets.forEach(function(bullet) {
-        bullet.update(enemies[0].bitmap);
+    bullets.forEach(function (bullet) {
+        bullet.update();
     }, this);
 
-    enemies.forEach(function(enemy) {
+    enemies.forEach(function (enemy) {
         enemy.x -= 4;
 
         if (enemy.x <= 0) {
@@ -109,6 +112,7 @@ function checkMovement() {
     towers.forEach(function (tower) {
         tower.shootBullet();
     })
+
 }
 
 function startLoop() {
