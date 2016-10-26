@@ -171,6 +171,7 @@ function buildMap() {
         map[i] = [];
         for (var j = 0; j < 9; j++) {
             if (!isPathPoint(i, j, pathPoints)) {
+                console.log(i, j);
                 map[i][j] = {};
                 map[i][j] = groundTile.clone();
                 map[i][j].y = j * 64;
@@ -181,6 +182,7 @@ function buildMap() {
                     }
                 } (i, j));
                 stage.addChild(map[i][j]);
+
 
             }
         }
@@ -258,6 +260,9 @@ function addTower(x, y) {
         tow.x = x;
         tow.y = y;
 
+
+
+
         var bull = bullet.clone();
         bull.x = tow.x;
         bull.y = tow.y;
@@ -268,6 +273,7 @@ function addTower(x, y) {
         stage.addChild(tow);
 
         towers.push(t);
+
     }
 
 }
