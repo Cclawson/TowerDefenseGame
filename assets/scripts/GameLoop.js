@@ -33,6 +33,7 @@ function loop() {
 
 function spawnEnemy() {
     let spawnedEnemy = new Enemy(enemySprite.clone(), 5, 4);
+    enemyCount++;
     stage.addChild(spawnedEnemy.bitmap);
     enemies.push(spawnedEnemy);
 }
@@ -78,7 +79,7 @@ function enemyTick() {
             //spawn enemy at initial square
             //trigger moveToNext on enemy
             //when it reaches the next tile, it will trigger itself to the next tile
-            spawnEnemy();
+            if (enemyCount < 100) spawnEnemy();
         }
         moveEnemies();
         stage.update();
