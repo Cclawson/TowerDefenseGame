@@ -3,7 +3,7 @@ var CANVAS_WIDTH = 800;
 var FPS = 30;
 var titleScreen, backgroundScreen, instructionScreen, gameoverScreen;
 var groundTile, pathTile;
-var redTowerStore, greenTowerStore, blueTowerStore, store;
+var redTowerStore, greenTowerStore, blueTowerStore, store, base;
 var inBtn, menuBtn, playBtn;
 var timertext, scoretext, lifetext;
 var towers = [];
@@ -109,6 +109,9 @@ function handleComplete() {
         src: "images/store.png",
         id: "store"
     }, {
+        src: "images/base.png",
+        id: "base"
+    }, {
         src: "images/towerDefense_tile118.png",
         id: "groundTile"
     }, {
@@ -116,7 +119,7 @@ function handleComplete() {
         id: "pathTile"
     }, {
         src: "images/towerDefense_tile246.png",
-        id: "pathTile"
+        id: "enemySprite"
     }];
 
 

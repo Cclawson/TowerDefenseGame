@@ -26,14 +26,18 @@ function buildAll() {
 
     var t = new Tower(tower, b, 10, 6);
 
+
+
     towers.push(t);
 
     enemies.push(new Enemy());
 
-    greenTowerStore = new createjs.Bitmap(loader.getResult("greenTower"))
-    blueTowerStore = new createjs.Bitmap(loader.getResult("blueTower"))
-    redTowerStore = new createjs.Bitmap(loader.getResult("redTower"))
-    store = new createjs.Bitmap(loader.getResult("store"))
+    greenTowerStore = new createjs.Bitmap(loader.getResult("greenTower"));
+    blueTowerStore = new createjs.Bitmap(loader.getResult("blueTower"));
+    redTowerStore = new createjs.Bitmap(loader.getResult("redTower"));
+    store = new createjs.Bitmap(loader.getResult("store"));
+    base = new createjs.Bitmap(loader.getResult("base"));
+
     //store
 
     store.x = 580;
@@ -41,12 +45,15 @@ function buildAll() {
 
     redTowerStore.x = 585;
     redTowerStore.y = 200;
-    
-    blueTowerStore.x=585;
-    blueTowerStore.y=310;
 
-    greenTowerStore.x=585;
-    greenTowerStore.y=420;
+    blueTowerStore.x = 585;
+    blueTowerStore.y = 310;
+
+    greenTowerStore.x = 585;
+    greenTowerStore.y = 420;
+
+    base.x = 520;
+    base.y = 60;
 
 
 
@@ -68,7 +75,7 @@ function buildAll() {
     inBtn.x = 650;
     inBtn.y = 500;
 
-    inBtn.on("click", function (evt) {
+    inBtn.on("click", function(evt) {
         hideAll();
         showInstructions();
     });
@@ -77,7 +84,7 @@ function buildAll() {
     menuBtn.x = 650;
     menuBtn.y = 500;
 
-    menuBtn.on("click", function (evt) {
+    menuBtn.on("click", function(evt) {
         hideAll();
         showTitle();
     })
@@ -86,7 +93,7 @@ function buildAll() {
     playBtn.x = 530
     playBtn.y = 500;
 
-    playBtn.on("click", function (evt) {
+    playBtn.on("click", function(evt) {
         hideAll();
         gamestate = GAMESTATES.STARTGAME;
     })
@@ -103,7 +110,7 @@ function buildAll() {
 
     lifetext = new createjs.Text("Life: 3", "20px Arial", "#000");
     lifetext.x = 600;
-    lifetext.y = 50; 
+    lifetext.y = 50;
 
     mousetext = new createjs.Text("", "20px Arial", "#000");
     mousetext.x = 50;
@@ -131,6 +138,7 @@ function buildAll() {
     stage.addChild(greenTowerStore);
     stage.addChild(blueTowerStore);
     stage.addChild(tower);
+    stage.addChild(base);
 
 
 
@@ -223,7 +231,8 @@ function hideAll() {
     redTowerStore.visible = false;
     greenTowerStore.visible = false;
     store.visible = false;
-    hideMap();
+    base.visible = false;
+    // hideMap();
 }
 
 function hideMap() {

@@ -13,8 +13,7 @@ function loop() {
             break;
         case GAMESTATES.INGAME:
             updateTimer();
-            score += 1;
-            scoretext.text = "Score: " + score;
+            updateScore();
             checkMovement();
             break;
         case GAMESTATES.GAMEOVER:
@@ -31,11 +30,11 @@ function loop() {
 
 
 function checkMovement() {
-    bullets.forEach(function (bullet) {
+    bullets.forEach(function(bullet) {
         bullet.update(enemies[0]);
     }, this);
 
-    enemies.forEach(function (enemy) {
+    enemies.forEach(function(enemy) {
         enemy.x -= 4;
 
         if (enemy.x <= 0) {
