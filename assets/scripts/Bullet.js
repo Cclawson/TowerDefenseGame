@@ -1,4 +1,4 @@
-var Bullet = function (bulletBitmap) {
+var Bullet = function(bulletBitmap) {
     this.startX = bulletBitmap.x;
     this.startY = bulletBitmap.y;
     this.bulletBitmap = bulletBitmap;
@@ -12,14 +12,14 @@ var Bullet = function (bulletBitmap) {
     this.hasBeenDrawn = false;
 }
 
-Bullet.prototype.draw = function () {
+Bullet.prototype.draw = function() {
     if (!this.hasBeenDrawn) {
         stage.addChild(this.bulletBitmap);
         this.hasBeenDrawn = true;
     }
 };
 
-Bullet.prototype.update = function () {
+Bullet.prototype.update = function() {
     var enemyobj = enemies[0];
     var enemy = enemyobj.bitmap;
     var angle = Math.atan2(enemy.y - this.bulletBitmap.y, enemy.x - this.bulletBitmap.x);
@@ -41,6 +41,8 @@ Bullet.prototype.update = function () {
         if (enemyobj.health <= 0) {
             stage.removeChild(enemy);
             enemyobj.alive = false;
+            updateScore();
+
         }
         this.bulletBitmap.x = this.startX;
         this.bulletBitmap.y = this.startY;
@@ -48,7 +50,7 @@ Bullet.prototype.update = function () {
     }
 };
 
-Bullet.prototype.inBounds = function () {
+Bullet.prototype.inBounds = function() {
     return this.bulletBitmap.x >= 0 && this.bulletBitmap.x <= CANVAS_WIDTH &&
         this.bulletBitmap.y >= 0 && this.bulletBitmap.y <= CANVAS_HEIGHT;
 }

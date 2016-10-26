@@ -14,7 +14,6 @@ function loop() {
         case GAMESTATES.INGAME:
             tickerRunning = true;
             updateTimer();
-            updateScore();
             checkMovement();
             enemyTick();
             break;
@@ -31,7 +30,7 @@ function loop() {
 }
 
 function cleanUpTheDead() {
-    enemies.forEach(function (enemy) {
+    enemies.forEach(function(enemy) {
         if (!enemy.alive) stage.removeChild(enemy);
     });
 }
@@ -44,7 +43,7 @@ function spawnEnemy() {
 }
 
 function moveEnemies() {
-    enemies.forEach(function (enemy, index) {
+    enemies.forEach(function(enemy, index) {
         if (enemy.alive) {
             moveToNext(enemy);
 
@@ -54,6 +53,7 @@ function moveEnemies() {
         }
     });
 }
+
 
 function moveToNext(enemy) {
     if (enemy.currentNode.next) {
@@ -73,6 +73,15 @@ function moveToNext(enemy) {
             enemy.currentNode = enemy.currentNode.next;
         }
         stage.update();
+
+
+
+        var hitCastle = collisionMethod(enemy.bitmap, base);
+        if (hitCastle) {
+            enemy.alive = false;
+            stage.removeChild(enemy.bitmap);
+            updateLife();
+        }
     } else {
         stage.removeChild(enemy.bitmap);
         enemy.alive = false;
@@ -97,11 +106,11 @@ function enemyTick() {
 
 
 function checkMovement() {
-    bullets.forEach(function (bullet) {
+    bullets.forEach(function(bullet) {
         bullet.update();
     }, this);
 
-    enemies.forEach(function (enemy) {
+    enemies.forEach(function(enemy) {
         enemy.x -= 4;
 
         if (enemy.x <= 0) {
@@ -109,7 +118,7 @@ function checkMovement() {
         }
     });
 
-    towers.forEach(function (tower) {
+    towers.forEach(function(tower) {
         tower.shootBullet();
     })
 
