@@ -14,8 +14,7 @@ function loop() {
         case GAMESTATES.INGAME:
             tickerRunning = true;
             updateTimer();
-            score += 1;
-            scoretext.text = "Score: " + score;
+            updateScore();
             checkMovement();
             enemyTick();
             break;
@@ -29,6 +28,12 @@ function loop() {
     }
 
     stage.update();
+}
+
+function cleanUpTheDead() {
+    enemies.forEach(function (enemy) {
+        if (!enemy.alive) stage.removeChild(enemy);
+    });
 }
 
 function spawnEnemy() {
@@ -89,11 +94,11 @@ function enemyTick() {
 
 
 function checkMovement() {
-    bullets.forEach(function (bullet) {
+    bullets.forEach(function(bullet) {
         bullet.update(enemies[0].bitmap);
     }, this);
 
-    enemies.forEach(function (enemy) {
+    enemies.forEach(function(enemy) {
         enemy.x -= 4;
 
         if (enemy.x <= 0) {
