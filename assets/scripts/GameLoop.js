@@ -48,7 +48,6 @@ function moveEnemies() {
             moveToNext(enemy);
 
         } else {
-            console.log("herr");
             enemies.splice(index, 1);
         }
     });

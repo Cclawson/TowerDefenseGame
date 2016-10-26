@@ -117,9 +117,9 @@ function buildAll() {
     stage.addChild(store);
     stage.addChild(scoretext);
     stage.addChild(lifetext);
-    stage.addChild(redTowerStore);
-    stage.addChild(greenTowerStore);
-    stage.addChild(blueTowerStore);
+    // stage.addChild(redTowerStore);
+    // stage.addChild(greenTowerStore);
+    // stage.addChild(blueTowerStore);
     stage.addChild(base);
     hideAll();
     showTitle();
@@ -171,7 +171,6 @@ function buildMap() {
         map[i] = [];
         for (var j = 0; j < 9; j++) {
             if (!isPathPoint(i, j, pathPoints)) {
-                console.log(i, j);
                 map[i][j] = {};
                 map[i][j] = groundTile.clone();
                 map[i][j].y = j * 64;
