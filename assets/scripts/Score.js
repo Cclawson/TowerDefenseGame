@@ -1,9 +1,14 @@
     function startScore() {
-        score = 0;
+        score = 1000;
         scoretext.visible = true;
     }
 
     function updateScore() {
-        score += 1;
+        score += 150;
+        scoretext.text = "Score: " + score;
+    }
+
+    function buyTower() {
+        score -= 300;
         scoretext.text = "Score: " + score;
     }

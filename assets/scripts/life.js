@@ -5,5 +5,8 @@ function startLife() {
 
 function updateLife() {
     life -= 1;
-    lifetext.text = "Life: " + life; 
+    lifetext.text = "Life: " + life;
+    if (life <= 0) {
+        gamestate = GAMESTATES.GAMEOVER;
+    }
 }
