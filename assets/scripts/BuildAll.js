@@ -17,7 +17,6 @@ function buildAll() {
     bullet = new createjs.Bitmap(loader.getResult("bullet"));
     enemySprite = new createjs.Bitmap(loader.getResult("enemySprite"));
 
-<<<<<<< HEAD
     tower.x = 100;
     tower.y = 100;
 
@@ -33,8 +32,6 @@ function buildAll() {
     towers.push(t);
 
     enemies.push(new Enemy());
-=======
->>>>>>> 6980a01c92ee76d65ba08c8ec4e9cc5037fa8180
 
     greenTowerStore = new createjs.Bitmap(loader.getResult("greenTower"));
     blueTowerStore = new createjs.Bitmap(loader.getResult("blueTower"));
@@ -55,12 +52,9 @@ function buildAll() {
 
     greenTowerStore.x = 585;
     greenTowerStore.y = 420;
-<<<<<<< HEAD
 
     base.x = 520;
     base.y = 60;
-=======
->>>>>>> 6980a01c92ee76d65ba08c8ec4e9cc5037fa8180
 
 
 
@@ -142,14 +136,8 @@ function buildAll() {
     stage.addChild(redTowerStore);
     stage.addChild(greenTowerStore);
     stage.addChild(blueTowerStore);
-<<<<<<< HEAD
     stage.addChild(tower);
     stage.addChild(base);
-
-
-=======
->>>>>>> 6980a01c92ee76d65ba08c8ec4e9cc5037fa8180
-
     hideAll();
     showTitle();
 }
@@ -204,11 +192,11 @@ function buildMap() {
                 map[i][j] = groundTile.clone();
                 map[i][j].y = j * 64;
                 map[i][j].x = i * 64;
-                map[i][j].on("click", function (x, y) {
-                    return function () {
+                map[i][j].on("click", function(x, y) {
+                    return function() {
                         addTower(x * 64, y * 64);
                     }
-                } (i, j));
+                }(i, j));
                 stage.addChild(map[i][j]);
 
             }
@@ -228,7 +216,7 @@ function buildSprite() {
 
 }
 
-function displaySprites() { }
+function displaySprites() {}
 
 function hideAll() {
     instructionScreen.visible = false;
@@ -246,12 +234,8 @@ function hideAll() {
     redTowerStore.visible = false;
     greenTowerStore.visible = false;
     store.visible = false;
-<<<<<<< HEAD
     base.visible = false;
     // hideMap();
-=======
-    //  hideMap();
->>>>>>> 6980a01c92ee76d65ba08c8ec4e9cc5037fa8180
 }
 
 function hideMap() {
