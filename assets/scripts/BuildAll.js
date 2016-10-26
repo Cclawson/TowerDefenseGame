@@ -183,7 +183,8 @@ function buildMap() {
     for (var i = 0; i < 9; i++) {
         map[i] = [];
         for (var j = 0; j < 9; j++) {
-            if (pathPoints.indexOf([i, j]) < 0) {
+            if (!isPathPoint(i, j, pathPoints)) {
+                console.log(i, j);
                 map[i][j] = {};
                 map[i][j] = groundTile.clone();
                 map[i][j].y = j * 64;
@@ -201,6 +202,16 @@ function buildMap() {
         path.add(nextTile);
         stage.addChild(nextTile);
     }
+}
+
+function isPathPoint(i, j, pathPoints) {
+    var isPathPoint = false;
+    pathPoints.forEach(function (point) {
+        if (point[0] == i && point[1] == j) {
+            isPathPoint = true;
+        }
+    });
+    return isPathPoint;
 }
 
 function buildSprite() {
@@ -225,7 +236,7 @@ function hideAll() {
     redTowerStore.visible = false;
     greenTowerStore.visible = false;
     store.visible = false;
-    hideMap();
+    // hideMap();
 }
 
 function hideMap() {
