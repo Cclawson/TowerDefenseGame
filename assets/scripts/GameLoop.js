@@ -30,6 +30,12 @@ function loop() {
     stage.update();
 }
 
+function cleanUpTheDead() {
+    enemies.forEach(function (enemy) {
+        if (!enemy.alive) stage.removeChild(enemy);
+    });
+}
+
 function spawnEnemy() {
     let spawnedEnemy = new Enemy(enemySprite.clone(), 5, 4);
     enemyCount++;

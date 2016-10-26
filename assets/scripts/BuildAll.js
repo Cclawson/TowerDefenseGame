@@ -27,11 +27,7 @@ function buildAll() {
 
     var t = new Tower(tower, b, 10, 6);
 
-
-
     towers.push(t);
-
-    enemies.push(new Enemy());
 
     greenTowerStore = new createjs.Bitmap(loader.getResult("greenTower"));
     blueTowerStore = new createjs.Bitmap(loader.getResult("blueTower"));
@@ -187,7 +183,8 @@ function buildMap() {
     for (var i = 0; i < 9; i++) {
         map[i] = [];
         for (var j = 0; j < 9; j++) {
-            if (pathPoints.indexOf([i, j]) < 0) {
+            if (!isPathPoint(i, j, pathPoints)) {
+                console.log(i, j);
                 map[i][j] = {};
                 map[i][j] = groundTile.clone();
                 map[i][j].y = j * 64;
@@ -210,6 +207,16 @@ function buildMap() {
         path.add(nextTile);
         stage.addChild(nextTile);
     }
+}
+
+function isPathPoint(i, j, pathPoints) {
+    var isPathPoint = false;
+    pathPoints.forEach(function(point) {
+        if (point[0] == i && point[1] == j) {
+            isPathPoint = true;
+        }
+    });
+    return isPathPoint;
 }
 
 function buildSprite() {
