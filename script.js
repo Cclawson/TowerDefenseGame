@@ -116,7 +116,7 @@ function handleComplete() {
         id: "pathTile"
     }, {
         src: "images/towerDefense_tile246.png",
-        id: "pathTile"
+        id: "enemySprite"
     }];
 
 
