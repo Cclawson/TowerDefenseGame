@@ -101,13 +101,13 @@ function checkMovement() {
         bullet.update();
     }, this);
 
-    enemies.forEach(function (enemy) {
-        enemy.x -= 4;
+    // enemies.forEach(function (enemy) {
+    //     enemy.x -= 4;
 
-        if (enemy.x <= 0) {
-            enemy.x = 500;
-        }
-    });
+    //     if (enemy.x <= 0) {
+    //         enemy.x = 500;
+    //     }
+    // });
 
     towers.forEach(function (tower) {
         tower.shootBullet();
