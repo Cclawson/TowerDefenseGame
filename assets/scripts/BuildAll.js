@@ -17,17 +17,6 @@ function buildAll() {
     bullet = new createjs.Bitmap(loader.getResult("bullet"));
     enemySprite = new createjs.Bitmap(loader.getResult("enemySprite"));
 
-    tower.x = 100;
-    tower.y = 100;
-
-    bullet.x = tower.x;
-    bullet.y = tower.y;
-
-    var b = new Bullet(bullet);
-
-    var t = new Tower(tower, b, 10, 6);
-
-    towers.push(t);
 
     greenTowerStore = new createjs.Bitmap(loader.getResult("greenTower"))
     blueTowerStore = new createjs.Bitmap(loader.getResult("blueTower"))
@@ -108,10 +97,6 @@ function buildAll() {
     mousetext.x = 50;
     mousetext.y = 100;
 
-    //tower
-    tower.x = 100;
-    tower.y = 100;
-
 
 
     //append to stage
@@ -131,8 +116,6 @@ function buildAll() {
     stage.addChild(redTowerStore);
     stage.addChild(greenTowerStore);
     stage.addChild(blueTowerStore);
-    stage.addChild(tower);
-
 
     hideAll();
     showTitle();
@@ -189,16 +172,21 @@ function buildMap() {
                 map[i][j] = groundTile.clone();
                 map[i][j].y = j * 64;
                 map[i][j].x = i * 64;
+                map[i][j].on("click", function (x, y) {
+                    return function () {
+                        addTower(x * 64, y * 64);
+                    }
+                } (i, j));
                 stage.addChild(map[i][j]);
 
             }
         }
     }
 
-    for (var j = 0; j < pathPoints.length; j++) {
+    for (var k = 0; k < pathPoints.length; k++) {
         var nextTile = pathTile.clone();
-        nextTile.x = pathPoints[j][0] * 64;
-        nextTile.y = pathPoints[j][1] * 64;
+        nextTile.x = pathPoints[k][0] * 64;
+        nextTile.y = pathPoints[k][1] * 64;
         path.add(nextTile);
         stage.addChild(nextTile);
     }
@@ -236,7 +224,7 @@ function hideAll() {
     redTowerStore.visible = false;
     greenTowerStore.visible = false;
     store.visible = false;
-    // hideMap();
+    //hideMap();
 }
 
 function hideMap() {
@@ -253,4 +241,22 @@ function showMap() {
             map[i][j].visible = true;
         }
     }
+}
+
+function addTower(x, y) {
+    var tow = tower.clone();
+    tow.x = x;
+    tow.y = y;
+
+    var bull = bullet.clone();
+    bull.x = tow.x;
+    bull.y = tow.y;
+
+    var b = new Bullet(bull);
+
+    var t = new Tower(tow, b, 10, 6);
+
+    stage.addChild(tow);
+
+    towers.push(t);
 }

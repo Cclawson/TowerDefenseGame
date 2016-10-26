@@ -2,24 +2,20 @@ var Bullet = (function () {
     var self;
     function Bullet(bulletBitmap) {
         self = this;
-        this.startX = bulletBitmap.x;
-        this.startY = bulletBitmap.y;
-        this.bulletBitmap = bulletBitmap;
-        this.velocity = 0;
-        this.active = true;
-        this.xVelocity = 6;
-        this.yVelocity = 6;
-        this.width = 3;
-        this.height = 3;
-        this.color = "#000";
-    }
-
-    Bullet.prototype.inBounds = function () {
-        return self.bulletBitmap.x >= 0 && self.bulletBitmap.x <= CANVAS_WIDTH &&
-            self.bulletBitmap.y >= 0 && self.bulletBitmap.y <= CANVAS_HEIGHT;
+        self.startX = bulletBitmap.x;
+        self.startY = bulletBitmap.y;
+        self.bulletBitmap = bulletBitmap;
+        self.velocity = 0;
+        self.active = true;
+        self.xVelocity = 6;
+        self.yVelocity = 6;
+        self.width = 3;
+        self.height = 3;
+        self.color = "#000";
     }
 
     Bullet.prototype.draw = function () {
+        console.log(self);
         stage.addChild(self.bulletBitmap);
     };
 
@@ -32,12 +28,16 @@ var Bullet = (function () {
         self.active = self.active && self.inBounds();
 
         if (!self.inBounds()) {
-            console.log(self.inBounds())
             self.bulletBitmap.x = self.startX;
             self.bulletBitmap.y = self.startY;
             self.active = true;
         }
     };
+
+    Bullet.prototype.inBounds = function () {
+        return self.bulletBitmap.x >= 0 && self.bulletBitmap.x <= CANVAS_WIDTH &&
+            self.bulletBitmap.y >= 0 && self.bulletBitmap.y <= CANVAS_HEIGHT;
+    }
 
     function toDegrees(angle) {
         return angle * (180 / Math.PI);
