@@ -37,7 +37,6 @@ function buildAll() {
     greenTowerStore.y = 420;
 
 
-
     //Screens
     titleScreen.x = 0;
     titleScreen.y = 0;
@@ -244,7 +243,6 @@ function addTower(x, y) {
     var b = new Bullet(bull);
 
     var t = new Tower(tow, b, 10, 6);
-
     stage.addChild(tow);
 
     towers.push(t);

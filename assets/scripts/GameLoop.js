@@ -90,7 +90,7 @@ function enemyTick() {
 
 function checkMovement() {
     bullets.forEach(function (bullet) {
-        bullet.update(enemies[0]);
+        bullet.update(enemies[0].bitmap);
     }, this);
 
     enemies.forEach(function (enemy) {
@@ -99,6 +99,10 @@ function checkMovement() {
         if (enemy.x <= 0) {
             enemy.x = 500;
         }
+    });
+
+    towers.forEach(function (tower) {
+        tower.shootBullet();
     })
 }
 
