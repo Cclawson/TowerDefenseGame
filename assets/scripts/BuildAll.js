@@ -15,6 +15,7 @@ function buildAll() {
 
     tower = new createjs.Bitmap(loader.getResult("tower"));
     bullet = new createjs.Bitmap(loader.getResult("bullet"));
+    enemySprite = new createjs.Bitmap(loader.getResult("enemySprite"));
 
     tower.x = 100;
     tower.y = 100;
@@ -27,8 +28,6 @@ function buildAll() {
     var t = new Tower(tower, b, 10, 6);
 
     towers.push(t);
-
-    enemies.push(new Enemy());
 
     greenTowerStore = new createjs.Bitmap(loader.getResult("greenTower"))
     blueTowerStore = new createjs.Bitmap(loader.getResult("blueTower"))
@@ -113,6 +112,8 @@ function buildAll() {
     tower.x = 100;
     tower.y = 100;
 
+
+
     //append to stage
     stage.addChild(titleScreen);
     stage.addChild(instructionScreen);
@@ -133,7 +134,6 @@ function buildAll() {
     stage.addChild(tower);
 
 
-
     hideAll();
     showTitle();
 }
@@ -143,19 +143,8 @@ function buildMap() {
     pathTile = new createjs.Bitmap(loader.getResult("pathTile"));
     path = new PathList();
 
-    for (var i = 0; i < 9; i++) {
-        map[i] = [];
-        for (var j = 0; j < 9; j++) {
-            map[i][j] = {};
-            map[i][j] = groundTile.clone();
-            map[i][j].y = j * 64;
-            map[i][j].x = i * 64;
-            stage.addChild(map[i][j]);
-        }
-    }
-
     let pathPoints = [
-        [-1, 0],
+        [-1, 1],
         [0, 1],
         [1, 1],
         [1, 2],
@@ -191,6 +180,20 @@ function buildMap() {
         [8, 1]
     ];
 
+    for (var i = 0; i < 9; i++) {
+        map[i] = [];
+        for (var j = 0; j < 9; j++) {
+            if (pathPoints.indexOf([i, j]) < 0) {
+                map[i][j] = {};
+                map[i][j] = groundTile.clone();
+                map[i][j].y = j * 64;
+                map[i][j].x = i * 64;
+                stage.addChild(map[i][j]);
+
+            }
+        }
+    }
+
     for (var j = 0; j < pathPoints.length; j++) {
         var nextTile = pathTile.clone();
         nextTile.x = pathPoints[j][0] * 64;
@@ -199,9 +202,6 @@ function buildMap() {
         stage.addChild(nextTile);
     }
 }
-
-
-
 
 function buildSprite() {
 
