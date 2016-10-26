@@ -2,6 +2,7 @@ var map = [];
 var path = {};
 
 function buildAll() {
+    collisionMethod = ndgmr.checkPixelCollision;
 
     titleScreen = new createjs.Bitmap(loader.getResult("title"));
     instructionScreen = new createjs.Bitmap(loader.getResult("instruction"));
@@ -16,18 +17,6 @@ function buildAll() {
     tower = new createjs.Bitmap(loader.getResult("tower"));
     bullet = new createjs.Bitmap(loader.getResult("bullet"));
     enemySprite = new createjs.Bitmap(loader.getResult("enemySprite"));
-
-    tower.x = 100;
-    tower.y = 100;
-
-    bullet.x = tower.x;
-    bullet.y = tower.y;
-
-    var b = new Bullet(bullet);
-
-    var t = new Tower(tower, b, 10, 6);
-
-    towers.push(t);
 
     greenTowerStore = new createjs.Bitmap(loader.getResult("greenTower"));
     blueTowerStore = new createjs.Bitmap(loader.getResult("blueTower"));
@@ -71,7 +60,7 @@ function buildAll() {
     inBtn.x = 650;
     inBtn.y = 500;
 
-    inBtn.on("click", function(evt) {
+    inBtn.on("click", function (evt) {
         hideAll();
         showInstructions();
     });
@@ -80,7 +69,7 @@ function buildAll() {
     menuBtn.x = 650;
     menuBtn.y = 500;
 
-    menuBtn.on("click", function(evt) {
+    menuBtn.on("click", function (evt) {
         hideAll();
         showTitle();
     })
@@ -89,7 +78,7 @@ function buildAll() {
     playBtn.x = 530
     playBtn.y = 500;
 
-    playBtn.on("click", function(evt) {
+    playBtn.on("click", function (evt) {
         hideAll();
         gamestate = GAMESTATES.STARTGAME;
     })
@@ -131,7 +120,6 @@ function buildAll() {
     stage.addChild(redTowerStore);
     stage.addChild(greenTowerStore);
     stage.addChild(blueTowerStore);
-    stage.addChild(tower);
     stage.addChild(base);
     hideAll();
     showTitle();
@@ -188,11 +176,11 @@ function buildMap() {
                 map[i][j] = groundTile.clone();
                 map[i][j].y = j * 64;
                 map[i][j].x = i * 64;
-                map[i][j].on("click", function(x, y) {
-                    return function() {
+                map[i][j].on("click", function (x, y) {
+                    return function () {
                         addTower(x * 64, y * 64);
                     }
-                }(i, j));
+                } (i, j));
                 stage.addChild(map[i][j]);
 
             }
@@ -210,7 +198,7 @@ function buildMap() {
 
 function isPathPoint(i, j, pathPoints) {
     var isPathPoint = false;
-    pathPoints.forEach(function(point) {
+    pathPoints.forEach(function (point) {
         if (point[0] == i && point[1] == j) {
             isPathPoint = true;
         }
@@ -222,7 +210,7 @@ function buildSprite() {
 
 }
 
-function displaySprites() {}
+function displaySprites() { }
 
 function hideAll() {
     instructionScreen.visible = false;

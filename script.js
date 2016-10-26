@@ -16,6 +16,7 @@ var tickerRunning = false;
 var tickCount = 0;
 var enemyCount = 0;
 var ticksBetweenSpawns = 50;
+var collisionMethod;
 var GAMESTATES = {
     CONSTRUCT: 0,
     TITLE: 1,
@@ -70,6 +71,8 @@ function handleComplete() {
         src: "scripts/life" + jsEnd
     }, {
         src: "scripts/PathList" + jsEnd
+    }, {
+        src: "scripts/Collision/ndgmr.Collision" + jsEnd
     }, {
         src: "images/title.png",
         id: "title"

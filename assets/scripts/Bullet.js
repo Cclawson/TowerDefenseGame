@@ -22,8 +22,8 @@ Bullet.prototype.draw = function () {
 Bullet.prototype.update = function (enemy) {
     var angle = Math.floor(toDegrees(Math.atan(enemy.y / enemy.x)));
     if (this.active) {
-        this.bulletBitmap.x += Math.cos(Math.PI / 180 * angle);
-        this.bulletBitmap.y += Math.sin(Math.PI / 180 * angle);
+        this.bulletBitmap.x += Math.ceil(Math.cos(angle));
+        this.bulletBitmap.y += Math.ceil(Math.sin(angle));
     }
     this.active = this.active && this.inBounds();
 
