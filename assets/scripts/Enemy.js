@@ -4,8 +4,8 @@ var Enemy = (function () {
         this.health = health;
         this.speed = speed;
         this.currentNode = path.head;
-        this.bitmap.x = this.currentNode.data.x;
-        this.bitmap.y = this.currentNode.data.y;
+        this.bitmap.x = this.currentNode.data.x + 32;
+        this.bitmap.y = this.currentNode.data.y + 32;
         this.alive = true;
     }
 
