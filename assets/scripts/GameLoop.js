@@ -80,16 +80,18 @@ function moveToNext(enemy) {
         stage.update();
 
 
-
-        var hitCastle = collisionMethod(enemy.bitmap, base);
-        if (hitCastle) {
-            enemy.alive = false;
-            stage.removeChild(enemy.bitmap);
-            updateLife();
-        }
+        //Instead of setting this for each level, just have the base be at the end of the path
+        //The else block below is called when the path is finished, aka, the base
+        // var hitCastle = collisionMethod(enemy.bitmap, base);
+        // if (hitCastle) {
+        //     enemy.alive = false;
+        //     stage.removeChild(enemy.bitmap);
+        //     updateLife();
+        // }
     } else {
         stage.removeChild(enemy.bitmap);
         enemy.alive = false;
+        updateLife();
         //enemy reached end
     }
 
