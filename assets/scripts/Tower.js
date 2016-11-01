@@ -4,6 +4,7 @@ var Tower = function (img, bullet, range, shotspeed) {
     this.shotspeed = shotspeed;
     this.img = img;
     bullets.push(this.bullet);
+    this.bullet.setParent(this);
 }
 
 Tower.prototype.shootBullet = function () {

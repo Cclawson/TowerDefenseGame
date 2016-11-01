@@ -254,24 +254,29 @@ function showMap() {
 
 function addTower(x, y) {
     if (score - 300 >= 0) {
-        buyTower();
         var tow = tower.clone();
         tow.x = x;
         tow.y = y;
+        var canplace = true;
+        for (var tn = 0; tn < towers.length; tn++) {
+            if (tow.x === towers[tn].img.x && tow.y === towers[tn].img.y) {
+                tn = towers.length;
+                canplace = false;
+            }
+        };
+        if (canplace) {
+            buyTower();
+            var bull = bullet.clone();
+            bull.x = tow.x;
+            bull.y = tow.y;
 
+            var b = new Bullet(bull);
 
+            var t = new Tower(tow, b, 100, 6);
+            stage.addChild(tow);
 
-
-        var bull = bullet.clone();
-        bull.x = tow.x;
-        bull.y = tow.y;
-
-        var b = new Bullet(bull);
-
-        var t = new Tower(tow, b, 10, 6);
-        stage.addChild(tow);
-
-        towers.push(t);
+            towers.push(t);
+        }
 
     }
 

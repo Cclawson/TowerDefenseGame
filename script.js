@@ -101,9 +101,6 @@ function handleComplete() {
         src: "images/bullet1.png",
         id: "bullet"
     }, {
-        src: "images/sprites.png",
-        id: "mySprites"
-    }, {
         src: "images/redTower.png",
         id: "redTower"
     }, {
