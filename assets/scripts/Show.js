@@ -16,6 +16,11 @@ function showGameOver() {
     scoretext.visible = true;
 }
 
+function showLevelTransition() {
+    continueBtn.visible = true;
+    //levelTransitionScreen.visible = true;
+}
+
 function startGame() {
     backgroundScreen.visible = true;
     showBase();

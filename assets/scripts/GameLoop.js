@@ -21,9 +21,12 @@ function loop() {
         case GAMESTATES.NEXTLEVEL:
             reset()
             levelNum++;
+            console.log(levels);
             buildMap(levels[levelNum]);
+            hideMap();
+            showLevelTransition();
+            gamestate = GAMESTATES.HOLD;
             //Pause here to show level transition screen. Continue button triggers startlevel
-            startLevel();
             break;
         case GAMESTATES.GAMEOVER:
             hideAll();
@@ -50,6 +53,12 @@ function reset() {
     towers.forEach(function (tower) {
         stage.removeChild(tower.img);
     });
+
+    for (var i = 0; i < map.length; i++) {
+        for (var j = 0; j < map[i].length; j++) {
+            stage.removeChild(map[i][j]);
+        }
+    }
 
     enemies = [];
     towers = [];

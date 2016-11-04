@@ -13,6 +13,7 @@ function buildAll() {
     inBtn = new createjs.Bitmap(loader.getResult("inBtn"));
     menuBtn = new createjs.Bitmap(loader.getResult("menuBtn"));
     playBtn = new createjs.Bitmap(loader.getResult("playBtn"));
+    continueBtn = new createjs.Bitmap(loader.getResult("playBtn"));
 
     tower = new createjs.Bitmap(loader.getResult("tower"));
     bullet = new createjs.Bitmap(loader.getResult("bullet"));
@@ -85,6 +86,12 @@ function buildAll() {
     playBtn.on("click", function (evt) {
         hideAll();
         gamestate = GAMESTATES.STARTGAME;
+    });
+
+    continueBtn.x = 200;
+    continueBtn.y = 200;
+    continueBtn.on("click", function (evt) {
+        startLevel();
     })
 
     //text
@@ -119,6 +126,7 @@ function buildAll() {
     stage.addChild(playBtn);
     stage.addChild(inBtn);
     stage.addChild(menuBtn);
+    stage.addChild(continueBtn);
     stage.addChild(timertext);
     stage.addChild(store);
     stage.addChild(scoretext);
@@ -320,6 +328,7 @@ function buildMap(level) {
     pathTile = level.pathTile;
     towerTile = level.towerTile;
     path = new PathList();
+    pathSpots = [];
     let pathPoints = level.pathPoints;
 
     for (var i = 0; i < 9; i++) {
@@ -341,6 +350,7 @@ function buildMap(level) {
         nextTile.y = pathPoints[k][1] * 64;
         path.add(nextTile);
         stage.addChild(nextTile);
+        pathSpots.push(nextTile);
     }
 
     for (var i = 0; i < level.towerSpots.length; i++) {
@@ -362,6 +372,7 @@ function buildMap(level) {
     base.x = basePoint[0] * 64;
     base.y = basePoint[1] * 64;
     stage.addChild(base);
+
 }
 
 function isPathPoint(i, j, pathPoints) {
@@ -385,6 +396,7 @@ function hideAll() {
     inBtn.visible = false;
     titleScreen.visible = false;
     menuBtn.visible = false;
+    continueBtn.visible = false;
     backgroundScreen.visible = false;
     gameoverScreen.visible = false;
     playBtn.visible = false;
@@ -409,6 +421,10 @@ function hideMap() {
             }
         }
     }
+
+    for (var i = 0; i < pathSpots.length; i++) {
+        pathSpots[i].visible = false;
+    }
 }
 
 function showMap() {
@@ -418,6 +434,10 @@ function showMap() {
                 map[i][j].visible = true;
             }
         }
+    }
+
+    for (var i = 0; i < pathSpots.length; i++) {
+        pathSpots[i].visible = true;
     }
 }
 

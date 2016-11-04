@@ -19,6 +19,7 @@ var enemyCount = 0;
 var ticksBetweenSpawns = 50;
 var collisionMethod;
 var selectedTower;
+var pathSpots = [];
 var levels = [];
 var levelNum = 0;
 var GAMESTATES = {
