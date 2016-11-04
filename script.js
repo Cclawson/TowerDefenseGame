@@ -150,6 +150,9 @@ function handleComplete() {
         src: "images/towerDefense_tile247.png",
         id: "enemySpriteBrown"
     }, {
+        src: "images/rocketAnimated.png",
+        id: "rocketAnimated"
+    }, {
         src: "sounds/pain.mp3",
         id: "deathSound"
     }];
