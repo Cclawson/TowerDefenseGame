@@ -10,6 +10,7 @@ var towers = [];
 var bullets = [];
 var enemies = [];
 var score;
+var heart;
 var startTime;
 var gamestate;
 var tickerRunning = false;
@@ -77,6 +78,9 @@ function handleComplete() {
     }, {
         src: "images/title.png",
         id: "title"
+    }, {
+        src: "images/heart.png",
+        id: "heart"
     }, {
         src: "images/instruction.png",
         id: "instruction"
