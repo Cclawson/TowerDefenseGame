@@ -103,6 +103,10 @@ function playSound(name) {
     }, {
         src: "images/gameover.png",
         id: "gameover"
+    },
+    {
+        src: "images/win.png",
+        id: "winscreen"
     }, {
         src: "images/background.png",
         id: "bg"
