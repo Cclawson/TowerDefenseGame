@@ -23,13 +23,8 @@ function startGame() {
     startTimer();
     startScore();
     startLife();
-    showMouseInfo();
     showStore();
     gamestate = GAMESTATES.INGAME;
-}
-
-function showMouseInfo() {
-    mousetext.visible = true;
 }
 
 function showBase() {

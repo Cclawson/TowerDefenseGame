@@ -32,6 +32,12 @@ function buildAll() {
     redTowerStore.x = 585;
     redTowerStore.y = 200;
 
+    redTowerStore.on("click", function () {
+        if (selectedTower) {
+            buyRedUpgrade();
+        }
+    })
+
     blueTowerStore.x = 585;
     blueTowerStore.y = 310;
 
@@ -97,9 +103,9 @@ function buildAll() {
     lifetext.x = 600;
     lifetext.y = 50;
 
-    mousetext = new createjs.Text("", "20px Arial", "#000");
-    mousetext.x = 50;
-    mousetext.y = 100;
+    towertext = new createjs.Text("", "20px Arial", "#000");
+    towertext.x = 585;
+    towertext.y = 130;
 
 
 
@@ -113,13 +119,13 @@ function buildAll() {
     stage.addChild(inBtn);
     stage.addChild(menuBtn);
     stage.addChild(timertext);
-    stage.addChild(mousetext);
     stage.addChild(store);
     stage.addChild(scoretext);
     stage.addChild(lifetext);
-    // stage.addChild(redTowerStore);
-    // stage.addChild(greenTowerStore);
-    // stage.addChild(blueTowerStore);
+    stage.addChild(towertext);
+    stage.addChild(redTowerStore);
+    stage.addChild(greenTowerStore);
+    stage.addChild(blueTowerStore);
     stage.addChild(base);
     hideAll();
     showTitle();
@@ -223,7 +229,7 @@ function hideAll() {
     timertext.visible = false;
     lifetext.visible = false;
     scoretext.visible = false;
-    mousetext.visible = false;
+    towertext.visible = false;
     blueTowerStore.visible = false;
     redTowerStore.visible = false;
     greenTowerStore.visible = false;
@@ -255,8 +261,10 @@ function showMap() {
 function addTower(x, y) {
     if (score - 300 >= 0) {
         var tow = tower.clone();
-        tow.x = x;
-        tow.y = y;
+        tow.x = x + 32;
+        tow.y = y + 32;
+        tow.regX = tow.image.width / 2;
+        tow.regY = tow.image.height / 2;
         var canplace = true;
         for (var tn = 0; tn < towers.length; tn++) {
             if (tow.x === towers[tn].img.x && tow.y === towers[tn].img.y) {
@@ -272,9 +280,8 @@ function addTower(x, y) {
 
             var b = new Bullet(bull);
 
-            var t = new Tower(tow, b, 100, 6);
+            var t = new Tower(tow, b, 80, 6);
             stage.addChild(tow);
-
             towers.push(t);
         }
 

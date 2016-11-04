@@ -17,6 +17,7 @@ var tickCount = 0;
 var enemyCount = 0;
 var ticksBetweenSpawns = 50;
 var collisionMethod;
+var selectedTower;
 var GAMESTATES = {
     CONSTRUCT: 0,
     TITLE: 1,
@@ -95,9 +96,14 @@ function handleComplete() {
         src: "images/playButton.png",
         id: "playBtn"
     }, {
-        src: "images/tower1.png",
+        src: "images/tower0.png",
         id: "tower"
-    }, {
+    },
+    {
+        src: "images/tower1.png",
+        id: "tower-red"
+    },
+    {
         src: "images/bullet1.png",
         id: "bullet"
     }, {
@@ -125,7 +131,6 @@ function handleComplete() {
         src: "images/towerDefense_tile246.png",
         id: "enemySprite"
     }];
-
 
     loader = new createjs.LoadQueue(true, "assets/");
     loader.addEventListener("complete", handleComplete);

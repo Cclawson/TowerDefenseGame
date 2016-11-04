@@ -14,6 +14,7 @@ function loop() {
         case GAMESTATES.INGAME:
             tickerRunning = true;
             updateTimer();
+            updateTowerText();
             checkMovement();
             enemyTick();
             break;
@@ -36,7 +37,7 @@ function cleanUpTheDead() {
 }
 
 function spawnEnemy() {
-    let spawnedEnemy = new Enemy(enemySprite.clone(), 5, 4);
+    let spawnedEnemy = new Enemy(enemySprite.clone(), 3, 4);
     enemyCount++;
     stage.addChild(spawnedEnemy.bitmap);
     enemies.push(spawnedEnemy);

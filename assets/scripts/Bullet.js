@@ -3,16 +3,14 @@ var Bullet = function (bulletBitmap) {
     this.startX = bulletBitmap.x;
     this.startY = bulletBitmap.y;
     this.bulletBitmap = bulletBitmap;
-    this.velocity = 0;
     this.active = false;
     this.xVelocity = 5;
     this.yVelocity = 5;
     this.xMod = 1;
     this.yMod = 1;
-    this.width = 3;
-    this.height = 3;
-    this.color = "#000";
     this.hasBeenDrawn = false;
+    this.type = "normal";
+    this.cooldown = 0;
 }
 
 Bullet.prototype.draw = function () {
@@ -35,34 +33,35 @@ Bullet.prototype.update = function () {
             enemyobj = enem;
         }
     }
-    if (enemyobj) {
+    if (enemyobj && this.cooldown <= 0) {
         this.bulletBitmap.visible = true;
         var enemy = enemyobj.bitmap;
         var angle = Math.atan2(enemy.y - this.bulletBitmap.y, enemy.x - this.bulletBitmap.x);
         angle = toDegrees(angle);
-        if (!this.active) {
-            var velocityX = Math.cos((angle) * Math.PI / 180) * (this.xVelocity * 1);
-            var velocityY = Math.sin((angle) * Math.PI / 180) * (this.yVelocity * 1);
+        //this.parent.img.rotation = angle;
+        //  if (!this.active) {
+        var velocityX = Math.cos((angle) * Math.PI / 180) * (this.xVelocity * 1);
+        var velocityY = Math.sin((angle) * Math.PI / 180) * (this.yVelocity * 1);
 
-            if (velocityX < 0) {
-                this.xMod = -1;
-            } else {
-                this.xMod = 1;
-            }
-
-            if (velocityY < 0) {
-                this.yMod = -1;
-            } else {
-                this.yMod = 1;
-            }
-
-            this.bulletBitmap.x += velocityX;
-            this.bulletBitmap.y += velocityY;
-            this.active = true;
+        if (velocityX < 0) {
+            this.xMod = -1;
         } else {
-            this.bulletBitmap.x += this.xMod * this.xVelocity;
-            this.bulletBitmap.y += this.yMod * this.yVelocity;
+            this.xMod = 1;
         }
+
+        if (velocityY < 0) {
+            this.yMod = -1;
+        } else {
+            this.yMod = 1;
+        }
+
+        this.bulletBitmap.x += velocityX;
+        this.bulletBitmap.y += velocityY;
+        this.active = true;
+        //  } else {
+        //     this.bulletBitmap.x += this.xMod * this.xVelocity;
+        //     this.bulletBitmap.y += this.yMod * this.yVelocity;
+        // }
 
         var collision;
 
@@ -81,12 +80,15 @@ Bullet.prototype.update = function () {
                 this.bulletBitmap.x = this.startX;
                 this.bulletBitmap.y = this.startY;
                 this.active = false;
+                this.cooldown = 30;
             }
         }
         if (!this.inBounds()) {
             this.bulletBitmap.x = this.startX;
             this.bulletBitmap.y = this.startY;
             this.active = false;
+            this.cooldown = 30;
+
         }
     } else {
         this.bulletBitmap.x = this.startX;
@@ -94,18 +96,19 @@ Bullet.prototype.update = function () {
         this.bulletBitmap.visible = false;
         this.active = false;
     }
+    if (this.cooldown > 0) {
+        this.cooldown -= 1;
+    }
 };
 
 Bullet.prototype.inBounds = function () {
     return this.bulletBitmap.x >= (this.parent.img.x - this.parent.range) && this.bulletBitmap.x <= (this.parent.img.x + this.parent.range) &&
         this.bulletBitmap.y >= (this.parent.img.y - this.parent.range) && this.bulletBitmap.y <= (this.parent.img.y + this.parent.range)
-    // return this.bulletBitmap.x >= 0 && this.bulletBitmap.x <= CANVAS_WIDTH &&
-    //     this.bulletBitmap.y >= 0 && this.bulletBitmap.y <= CANVAS_HEIGHT;
 }
 
 Bullet.prototype.checkEnemyDetection = function (enemy) {
-    return enemy.bitmap.x >= (this.parent.img.x - this.parent.range) && enemy.bitmap.x <= (this.parent.img.x + this.parent.range) &&
-        enemy.bitmap.y >= (this.parent.img.y - this.parent.range) && enemy.bitmap.y <= (this.parent.img.y + this.parent.range)
+    return enemy.bitmap.x >= (this.parent.img.x - this.parent.range - 32) && enemy.bitmap.x <= (this.parent.img.x + this.parent.range + 32) &&
+        enemy.bitmap.y >= (this.parent.img.y - this.parent.range - 32) && enemy.bitmap.y <= (this.parent.img.y + this.parent.range)
 }
 
 function toDegrees(angle) {
