@@ -21,7 +21,6 @@ function loop() {
         case GAMESTATES.NEXTLEVEL:
             reset()
             levelNum++;
-            console.log(levels);
             buildMap(levels[levelNum]);
             hideMap();
             showLevelTransition();
@@ -29,6 +28,8 @@ function loop() {
             //Pause here to show level transition screen. Continue button triggers startlevel
             break;
         case GAMESTATES.GAMEOVER:
+            reset();
+            levelNum = 0;
             hideAll();
             showGameOver();
             gamestate = GAMESTATES.HOLD;
