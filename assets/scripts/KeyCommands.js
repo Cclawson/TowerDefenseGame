@@ -10,6 +10,7 @@ var KEYCODE_SPACE = 32;
 var KEYCODE_J = 74;
 var KEYCODE_H = 72;
 var KEYCODE_M = 77;
+var KEYCODE_L = 76;
 
 
 var RightPressed, LeftPressed, UpPressed, DownPressed = false;
@@ -39,9 +40,24 @@ function handleKeyDown(evt) {
             break;
         case KEYCODE_D:
             RightPressed = true;
+
+
+
+
+
+
+
             break;
         case KEYCODE_A:
             LeftPressed = true;
+            break;
+        case KEYCODE_L:
+            createjs.Sound.play("intro");
+            enemies.forEach(function(enemy) {
+                enemy.bitmap.image = loader.getResult("domBeatty");
+            });
+            enemySprite.image = loader.getResult("domBeatty");
+            dom = true;
             break;
         case KEYCODE_SPACE:
             UpPressed = true;

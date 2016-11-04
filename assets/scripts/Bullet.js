@@ -73,7 +73,12 @@ Bullet.prototype.update = function () {
                         stage.removeChild(enem.bitmap);
                         enem.alive = false;
 
+                        // if (dom) {
+                        //     createjs.Sound.play("domSound")
+                        // } else {
                         createjs.Sound.play("deathSound");
+
+                        // }
                         updateScore();
                     }
                 } else if (this.type == "freeze") {

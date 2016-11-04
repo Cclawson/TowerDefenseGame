@@ -23,6 +23,7 @@ function showWinScreen() {
 
 function showLevelTransition() {
     continueBtn.visible = true;
+    trans.visible = true;
     //levelTransitionScreen.visible = true;
 }
 
@@ -39,6 +40,8 @@ function startGame() {
 function startLevel() {
     backgroundScreen.visible = true;
     showBase();
+    startScore();
+    startLife();
     showMap();
     showStore();
     gamestate = GAMESTATES.INGAME;

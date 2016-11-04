@@ -9,6 +9,7 @@ function loop() {
         case GAMESTATES.INSTRUCTION:
             break;
         case GAMESTATES.STARTGAME:
+            hideAll();
             startGame();
             break;
         case GAMESTATES.INGAME:

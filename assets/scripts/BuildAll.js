@@ -7,6 +7,7 @@ function buildAll() {
     titleScreen = new createjs.Bitmap(loader.getResult("title"));
     instructionScreen = new createjs.Bitmap(loader.getResult("instruction"));
     backgroundScreen = new createjs.Bitmap(loader.getResult("bg"));
+    trans = new createjs.Bitmap(loader.getResult("trans"));
     winScreen = new createjs.Bitmap(loader.getResult("winscreen"));
 
     gameoverScreen = new createjs.Bitmap(loader.getResult("gameover"));
@@ -14,7 +15,7 @@ function buildAll() {
     inBtn = new createjs.Bitmap(loader.getResult("inBtn"));
     menuBtn = new createjs.Bitmap(loader.getResult("menuBtn"));
     playBtn = new createjs.Bitmap(loader.getResult("playBtn"));
-    continueBtn = new createjs.Bitmap(loader.getResult("playBtn"));
+    continueBtn = new createjs.Bitmap(loader.getResult("contBtn"));
     muteBtn = new createjs.Bitmap(loader.getResult("mute"));
     loudBtn = new createjs.Bitmap(loader.getResult("loud"));
 
@@ -63,6 +64,9 @@ function buildAll() {
     //Screens
     titleScreen.x = 0;
     titleScreen.y = 0;
+
+    trans.x = 0;
+    trans.y = 0;
 
     instructionScreen.x = 0;
     instructionScreen.y = 0;
@@ -118,8 +122,8 @@ function buildAll() {
         gamestate = GAMESTATES.STARTGAME;
     });
 
-    continueBtn.x = 200;
-    continueBtn.y = 200;
+    continueBtn.x = 530;
+    continueBtn.y = 500;
     continueBtn.on("click", function (evt) {
         showMap();
         startLevel();
@@ -153,6 +157,7 @@ function buildAll() {
     buildMap(levels[levelNum]);
     stage.addChild(titleScreen);
     stage.addChild(instructionScreen);
+    stage.addChild(trans);
     stage.addChild(gameoverScreen);
     stage.addChild(winScreen);
     stage.addChild(playBtn);
@@ -445,7 +450,9 @@ function hideAll() {
     store.visible = false;
     base.visible = false;
     heart.visible = false;
+    trans.visible = false;
     winScreen.visible = false;
+    trans.visible = false;
     hideMap();
 }
 
