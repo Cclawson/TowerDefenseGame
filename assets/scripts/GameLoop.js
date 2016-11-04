@@ -98,7 +98,11 @@ function spawnEnemy() {
 function moveEnemies() {
     enemies.forEach(function (enemy, index) {
         if (enemy.alive) {
-            moveToNext(enemy);
+            if (enemy.frozen <= 0) {
+                moveToNext(enemy);
+            } else {
+                enemy.frozen -= 1;
+            }
 
         } else {
             enemies.splice(index, 1);

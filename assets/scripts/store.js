@@ -13,12 +13,39 @@ function updateTowerText() {
     }
 }
 
-function buyRedUpgrade() {
+function buyGreenUpgrade() {
     if (score >= 200 && selectedTower) {
         if (!selectedTower.upgraded) {
             score -= 200;
             scoretext.text = "Score: " + score;
             selectedTower.range += 40;
+            selectedTower.img.image = loader.getResult("tower-green");
+            selectedTower.upgraded = true;
+            hideStore();
+        }
+    }
+}
+
+function buyBlueUpgrade() {
+    if (score >= 200 && selectedTower) {
+        if (!selectedTower.upgraded) {
+            score -= 200;
+            scoretext.text = "Score: " + score;
+            selectedTower.bullet.type = "freeze";
+            selectedTower.img.image = loader.getResult("tower-blue");
+            selectedTower.upgraded = true;
+            hideStore();
+        }
+    }
+}
+
+
+function buyRedUpgrade() {
+    if (score >= 200 && selectedTower) {
+        if (!selectedTower.upgraded) {
+            score -= 200;
+            scoretext.text = "Score: " + score;
+            selectedTower.bullet.damage += 1;
             selectedTower.img.image = loader.getResult("tower-red");
             selectedTower.upgraded = true;
             hideStore();

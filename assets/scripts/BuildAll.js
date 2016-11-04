@@ -15,6 +15,8 @@ function buildAll() {
     menuBtn = new createjs.Bitmap(loader.getResult("menuBtn"));
     playBtn = new createjs.Bitmap(loader.getResult("playBtn"));
     continueBtn = new createjs.Bitmap(loader.getResult("playBtn"));
+    muteBtn = new createjs.Bitmap(loader.getResult("mute"));
+    loudBtn = new createjs.Bitmap(loader.getResult("loud"));
 
     tower = new createjs.Bitmap(loader.getResult("tower"));
     bullet = new createjs.Bitmap(loader.getResult("bullet"));
@@ -43,10 +45,20 @@ function buildAll() {
     blueTowerStore.x = 585;
     blueTowerStore.y = 310;
 
+    blueTowerStore.on("click", function () {
+        if (selectedTower) {
+            buyBlueUpgrade();
+        }
+    })
+
     greenTowerStore.x = 585;
     greenTowerStore.y = 420;
 
-
+    greenTowerStore.on("click", function () {
+        if (selectedTower) {
+            buyGreenUpgrade();
+        }
+    })
 
     //Screens
     titleScreen.x = 0;
@@ -78,6 +90,23 @@ function buildAll() {
     menuBtn.on("click", function (evt) {
         hideAll();
         showTitle();
+    })
+
+    loudBtn.x = 730;
+    loudBtn.y = 10;
+    loudBtn.on("click", function () {
+        bgmusic.muted = true;
+        loudBtn.visible = false;
+        muteBtn.visible = true;
+    })
+
+    muteBtn.x = 730;
+    muteBtn.y = 10;
+    muteBtn.visible = false;
+    muteBtn.on("click", function () {
+        bgmusic.muted = false;
+        muteBtn.visible = false;
+        loudBtn.visible = true;
     })
 
     //play Button
@@ -139,8 +168,11 @@ function buildAll() {
     stage.addChild(redTowerStore);
     stage.addChild(greenTowerStore);
     stage.addChild(blueTowerStore);
+    stage.addChild(loudBtn);
+    stage.addChild(muteBtn);
     hideAll();
     showTitle();
+    playSound("bgmusic");
 }
 
 

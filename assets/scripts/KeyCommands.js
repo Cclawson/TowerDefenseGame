@@ -46,6 +46,17 @@ function handleKeyDown(evt) {
         case KEYCODE_SPACE:
             UpPressed = true;
             break;
+        case KEYCODE_M:
+            if (loudBtn.visible) {
+                muteBtn.visible = true;
+                loudBtn.visible = false;
+                bgmusic.muted = true;
+            } else {
+                loudBtn.visible = true;
+                muteBtn.visible = false;
+                bgmusic.muted = false;
+            }
+            break;
         default:
             break;
     }

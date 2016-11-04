@@ -11,6 +11,7 @@ var Bullet = function (bulletBitmap) {
     this.hasBeenDrawn = false;
     this.type = "normal";
     this.cooldown = 0;
+    this.damage = 1;
 }
 
 Bullet.prototype.draw = function () {
@@ -66,13 +67,17 @@ Bullet.prototype.update = function () {
             collision = collisionMethod(this.bulletBitmap, enem.bitmap);
 
             if (collision) {
-                enem.health -= 1;
-                if (enem.health <= 0) {
-                    stage.removeChild(enem.bitmap);
-                    enem.alive = false;
+                if (this.type == "normal") {
+                    enem.health -= this.damage;
+                    if (enem.health <= 0) {
+                        stage.removeChild(enem.bitmap);
+                        enem.alive = false;
 
-                    createjs.Sound.play("deathSound");
-                    updateScore();
+                        createjs.Sound.play("deathSound");
+                        updateScore();
+                    }
+                } else if (this.type == "freeze") {
+                    enem.frozen = 30;
                 }
                 en = enemies.length;
                 this.bulletBitmap.x = this.startX;
@@ -100,8 +105,8 @@ Bullet.prototype.update = function () {
 };
 
 Bullet.prototype.inBounds = function () {
-    return this.bulletBitmap.x >= (this.parent.img.x - this.parent.range) && this.bulletBitmap.x <= (this.parent.img.x + this.parent.range) &&
-        this.bulletBitmap.y >= (this.parent.img.y - this.parent.range) && this.bulletBitmap.y <= (this.parent.img.y + this.parent.range)
+    return this.bulletBitmap.x >= (this.parent.img.x - this.parent.range - 32) && this.bulletBitmap.x <= (this.parent.img.x + this.parent.range + 32) &&
+        this.bulletBitmap.y >= (this.parent.img.y - this.parent.range - 32) && this.bulletBitmap.y <= (this.parent.img.y + this.parent.range + 32)
 }
 
 Bullet.prototype.checkEnemyDetection = function (enemy) {

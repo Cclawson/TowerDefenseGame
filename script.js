@@ -21,7 +21,7 @@ var collisionMethod;
 var selectedTower;
 var pathSpots = [];
 var levels = [];
-var levelNum = 2;
+var levelNum = 0;
 var GAMESTATES = {
     CONSTRUCT: 0,
     TITLE: 1,
@@ -33,11 +33,19 @@ var GAMESTATES = {
     NEXTLEVEL: 7,
 }
 var stage, loader;
+var bgmusic;
+
 
 function handleComplete() {
     setupCanvas();
     buildAll();
     startLoop();
+}
+
+function playSound(name) {
+    bgmusic = createjs.Sound.play("bgmusic");
+    createjs.Sound.volume = .1;
+    bgmusic.loop = -1;
 }
 
 
@@ -112,6 +120,14 @@ function handleComplete() {
         id: "tower-red"
     },
     {
+        src: "images/tower2.png",
+        id: "tower-blue"
+    },
+    {
+        src: "images/tower3.png",
+        id: "tower-green"
+    },
+    {
         src: "images/bullet1.png",
         id: "bullet"
     }, {
@@ -171,6 +187,15 @@ function handleComplete() {
     }, {
         src: "images/win.png",
         id: "winscreen"
+    }, {
+        src: "images/loud.png",
+        id: "loud"
+    }, {
+        src: "images/mute.png",
+        id: "mute"
+    }, {
+        src: "sounds/bensound-epic.mp3",
+        id: "bgmusic"
     }];
 
     createjs.Sound.alternateExtensions = ["mp3"];

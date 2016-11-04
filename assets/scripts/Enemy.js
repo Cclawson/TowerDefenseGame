@@ -7,6 +7,7 @@ var Enemy = (function () {
         this.bitmap.x = this.currentNode.data.x + 32;
         this.bitmap.y = this.currentNode.data.y + 32;
         this.alive = true;
+        this.frozen = 0;
     }
 
     return Enemy;
