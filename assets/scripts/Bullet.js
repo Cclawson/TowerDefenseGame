@@ -38,8 +38,7 @@ Bullet.prototype.update = function () {
         var enemy = enemyobj.bitmap;
         var angle = Math.atan2(enemy.y - this.bulletBitmap.y - 32, enemy.x - this.bulletBitmap.x - 32);
         angle = toDegrees(angle);
-        //this.parent.img.rotation = angle;
-        //  if (!this.active) {
+
         var velocityX = Math.cos((angle) * Math.PI / 180) * (this.xVelocity * 1);
         var velocityY = Math.sin((angle) * Math.PI / 180) * (this.yVelocity * 1);
 
@@ -58,10 +57,7 @@ Bullet.prototype.update = function () {
         this.bulletBitmap.x += velocityX;
         this.bulletBitmap.y += velocityY;
         this.active = true;
-        //  } else {
-        //     this.bulletBitmap.x += this.xMod * this.xVelocity;
-        //     this.bulletBitmap.y += this.yMod * this.yVelocity;
-        // }
+
 
         var collision;
 

@@ -20,7 +20,6 @@ function startGame() {
     backgroundScreen.visible = true;
     showBase();
     showMap();
-    startTimer();
     startScore();
     startLife();
     showStore();
