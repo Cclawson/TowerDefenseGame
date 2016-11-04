@@ -13,6 +13,7 @@ function loop() {
             break;
         case GAMESTATES.INGAME:
             tickerRunning = true;
+            showMap();
             updateTimer();
             updateTowerText();
             checkMovement();
@@ -34,6 +35,8 @@ function loop() {
         case GAMESTATES.GAMEOVER:
             reset();
             levelNum = 0;
+            buildMap(levels[levelNum]);
+            hideMap();
             hideAll();
             showGameOver();
             gamestate = GAMESTATES.HOLD;
