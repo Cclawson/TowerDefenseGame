@@ -16,8 +16,8 @@ function buildAll() {
 
     tower = new createjs.Bitmap(loader.getResult("tower"));
     bullet = new createjs.Bitmap(loader.getResult("bullet"));
-    enemySprite = new createjs.Bitmap(loader.getResult("enemySprite"));
 
+    heart = new createjs.Bitmap(loader.getResult("heart"));
     greenTowerStore = new createjs.Bitmap(loader.getResult("greenTower"));
     blueTowerStore = new createjs.Bitmap(loader.getResult("blueTower"));
     redTowerStore = new createjs.Bitmap(loader.getResult("redTower"));
@@ -44,8 +44,6 @@ function buildAll() {
     greenTowerStore.x = 585;
     greenTowerStore.y = 420;
 
-    base.x = 520;
-    base.y = 60;
 
 
     //Screens
@@ -66,7 +64,7 @@ function buildAll() {
     inBtn.x = 650;
     inBtn.y = 500;
 
-    inBtn.on("click", function (evt) {
+    inBtn.on("click", function(evt) {
         hideAll();
         showInstructions();
     });
@@ -75,7 +73,7 @@ function buildAll() {
     menuBtn.x = 650;
     menuBtn.y = 500;
 
-    menuBtn.on("click", function (evt) {
+    menuBtn.on("click", function(evt) {
         hideAll();
         showTitle();
     })
@@ -84,7 +82,7 @@ function buildAll() {
     playBtn.x = 530
     playBtn.y = 500;
 
-    playBtn.on("click", function (evt) {
+    playBtn.on("click", function(evt) {
         hideAll();
         gamestate = GAMESTATES.STARTGAME;
     })
@@ -99,8 +97,8 @@ function buildAll() {
     scoretext.y = 100;
 
 
-    lifetext = new createjs.Text("Life: 3", "20px Arial", "#000");
-    lifetext.x = 600;
+    lifetext = new createjs.Text("3", "20px Arial", "#000");
+    lifetext.x = 620;
     lifetext.y = 50;
 
     towertext = new createjs.Text("", "20px Arial", "#000");
@@ -108,10 +106,13 @@ function buildAll() {
     towertext.y = 130;
 
 
+    heart.x = 605;
+    heart.y = 45;
 
     //append to stage
     stage.addChild(backgroundScreen);
-    buildMap();
+    initLevels();
+    buildMap(levels[1]);
     stage.addChild(titleScreen);
     stage.addChild(instructionScreen);
     stage.addChild(gameoverScreen);
@@ -121,22 +122,18 @@ function buildAll() {
     stage.addChild(timertext);
     stage.addChild(store);
     stage.addChild(scoretext);
+    stage.addChild(heart);
     stage.addChild(lifetext);
     stage.addChild(towertext);
     stage.addChild(redTowerStore);
     stage.addChild(greenTowerStore);
     stage.addChild(blueTowerStore);
-    stage.addChild(base);
     hideAll();
     showTitle();
 }
 
-function buildMap() {
-    groundTile = new createjs.Bitmap(loader.getResult("groundTile"));
-    pathTile = new createjs.Bitmap(loader.getResult("pathTile"));
-    path = new PathList();
-
-    let pathPoints = [
+function initLevels() {
+    let levelOnePath = [
         [-1, 1],
         [0, 1],
         [1, 1],
@@ -173,6 +170,157 @@ function buildMap() {
         [8, 1]
     ];
 
+    let levelOneTowers = [
+        [2, 0],
+        [2, 6],
+        [4, 8],
+        [4, 2],
+        [6, 0],
+        [6, 6],
+        [0, 4],
+        [8, 4]
+    ];
+
+    let levelTwoPath = [
+        [-1, 7],
+        [0, 7],
+        [1, 7],
+        [2, 7],
+        [3, 7],
+        [4, 7],
+        [5, 7],
+        [6, 7],
+        [7, 7],
+        [7, 6],
+        [7, 5],
+        [7, 4],
+        [7, 3],
+        [7, 2],
+        [7, 1],
+        [6, 1],
+        [5, 1],
+        [4, 1],
+        [3, 1],
+        [2, 1],
+        [1, 1],
+        [1, 2],
+        [1, 3],
+        [1, 4],
+        [1, 5],
+        [2, 5],
+        [3, 5],
+        [4, 5],
+        [5, 5],
+        [5, 4],
+        [5, 3],
+        [4, 3],
+        [3, 3],
+    ];
+
+    let levelTwoTowers = [
+        [0, 1],
+        [5, 0],
+        [0, 5],
+        [2, 3],
+        [6, 4],
+        [3, 6],
+        [4, 8],
+        [8, 5],
+        [1, 8]
+
+    ];
+
+    let levelThreePath = [
+        [-1, 3],
+        [0, 3],
+        [1, 3],
+        [2, 3],
+        [3, 3],
+        [4, 3],
+        [5, 3],
+        [6, 3],
+        [7, 3],
+        [7, 2],
+        [7, 1],
+        [6, 1],
+        [5, 1],
+        [5, 2],
+        [5, 3],
+        [5, 4],
+        [5, 5],
+        [5, 6],
+        [5, 7],
+        [4, 7],
+        [3, 7],
+        [2, 7],
+        [1, 7],
+        [1, 6],
+        [1, 5],
+        [1, 4],
+        [1, 3],
+        [1, 2],
+        [1, 1],
+        [2, 1],
+        [3, 1],
+        [3, 2],
+        [3, 3],
+        [3, 4],
+        [3, 5],
+        [4, 5],
+        [5, 5],
+        [6, 5],
+        [7, 5],
+        [8, 5]
+    ];
+
+    let levelThreeTowers = [
+        [2, 2],
+        [6, 2],
+        [4, 4],
+        [2, 5],
+        [3, 6],
+        [6, 6],
+        [7, 4],
+        [4, 1],
+        [0, 7],
+        [3, 8]
+    ];
+
+    levels[0] = {};
+    levels[0].pathPoints = levelOnePath;
+    levels[0].towerSpots = levelOneTowers;
+    levels[0].towerTile = new createjs.Bitmap(loader.getResult("towerTileGrass"));
+    levels[0].pathTile = new createjs.Bitmap(loader.getResult("pathTileDirt"));
+    levels[0].groundTile = new createjs.Bitmap(loader.getResult("pathTileGrass"));
+    levels[0].enemy = new createjs.Bitmap(loader.getResult("enemySpriteGray"));
+
+    levels[1] = {};
+    levels[1].pathPoints = levelTwoPath;
+    levels[1].towerSpots = levelTwoTowers;
+    levels[1].towerTile = new createjs.Bitmap(loader.getResult("towerTileSand"));
+    levels[1].pathTile = new createjs.Bitmap(loader.getResult("pathTileDirt"));
+    levels[1].groundTile = new createjs.Bitmap(loader.getResult("pathTileSand"));
+    levels[1].enemy = new createjs.Bitmap(loader.getResult("enemySpriteGreen"));
+
+    levels[2] = {};
+    levels[2].pathPoints = levelThreePath;
+    levels[2].towerSpots = levelThreeTowers;
+    levels[2].towerTile = new createjs.Bitmap(loader.getResult("towerTileSteel"));
+    levels[2].pathTile = new createjs.Bitmap(loader.getResult("pathTileSand"));
+    levels[2].groundTile = new createjs.Bitmap(loader.getResult("pathTileSteel"));
+    levels[2].enemy = new createjs.Bitmap(loader.getResult("enemySpriteBrown"));
+}
+
+function buildMap(level) {
+    // groundTile = new createjs.Bitmap(loader.getResult("groundTile"));
+    // pathTile = new createjs.Bitmap(loader.getResult("pathTile"));
+    enemySprite = level.enemy;
+    groundTile = level.groundTile;
+    pathTile = level.pathTile;
+    towerTile = level.towerTile;
+    path = new PathList();
+    let pathPoints = level.pathPoints;
+
     for (var i = 0; i < 9; i++) {
         map[i] = [];
         for (var j = 0; j < 9; j++) {
@@ -181,14 +329,7 @@ function buildMap() {
                 map[i][j] = groundTile.clone();
                 map[i][j].y = j * 64;
                 map[i][j].x = i * 64;
-                map[i][j].on("click", function (x, y) {
-                    return function () {
-                        addTower(x * 64, y * 64);
-                    }
-                } (i, j));
                 stage.addChild(map[i][j]);
-
-
             }
         }
     }
@@ -200,11 +341,31 @@ function buildMap() {
         path.add(nextTile);
         stage.addChild(nextTile);
     }
+
+    for (var i = 0; i < level.towerSpots.length; i++) {
+        let towerSpot = level.towerSpots[i];
+        stage.removeChild(map[towerSpot[0]][towerSpot[1]]);
+        map[towerSpot[0]][towerSpot[1]] = towerTile.clone();
+        map[towerSpot[0]][towerSpot[1]].y = towerSpot[1] * 64;
+        map[towerSpot[0]][towerSpot[1]].x = towerSpot[0] * 64;
+        map[towerSpot[0]][towerSpot[1]].on("click", function(x, y) {
+            return function() {
+                addTower(x * 64, y * 64);
+            }
+        }(towerSpot[0], towerSpot[1]));
+        stage.addChild(map[towerSpot[0]][towerSpot[1]]);
+    }
+
+    let basePoint = pathPoints[pathPoints.length - 1];
+
+    base.x = basePoint[0] * 64;
+    base.y = basePoint[1] * 64;
+    stage.addChild(base);
 }
 
 function isPathPoint(i, j, pathPoints) {
     var isPathPoint = false;
-    pathPoints.forEach(function (point) {
+    pathPoints.forEach(function(point) {
         if (point[0] == i && point[1] == j) {
             isPathPoint = true;
         }
@@ -216,7 +377,7 @@ function buildSprite() {
 
 }
 
-function displaySprites() { }
+function displaySprites() {}
 
 function hideAll() {
     instructionScreen.visible = false;
@@ -235,6 +396,7 @@ function hideAll() {
     greenTowerStore.visible = false;
     store.visible = false;
     base.visible = false;
+    heart.visible = false;
     hideMap();
 }
 

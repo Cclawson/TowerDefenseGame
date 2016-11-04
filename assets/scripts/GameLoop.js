@@ -38,6 +38,8 @@ function cleanUpTheDead() {
 
 function spawnEnemy() {
     let spawnedEnemy = new Enemy(enemySprite.clone(), 3, 4);
+    spawnedEnemy.bitmap.regY = 32;
+    spawnedEnemy.bitmap.regX = 32;
     enemyCount++;
     stage.addChild(spawnedEnemy.bitmap);
     enemies.push(spawnedEnemy);
@@ -57,17 +59,21 @@ function moveEnemies() {
 
 function moveToNext(enemy) {
     if (enemy.currentNode.next) {
-        let newX = enemy.currentNode.next.data.x;
-        let newY = enemy.currentNode.next.data.y;
+        let newX = enemy.currentNode.next.data.x + 32;
+        let newY = enemy.currentNode.next.data.y + 32;
         if (newY > enemy.bitmap.y) {
             enemy.bitmap.y += enemy.speed;
+            enemy.bitmap.rotation = 90;
         } else if (newY < enemy.bitmap.y) {
             enemy.bitmap.y -= enemy.speed;
+            enemy.bitmap.rotation = -90;
         }
         if (newX > enemy.bitmap.x) {
             enemy.bitmap.x += enemy.speed;
+            enemy.bitmap.rotation = 0;
         } else if (newX < enemy.bitmap.x) {
             enemy.bitmap.x -= enemy.speed;
+            enemy.bitmap.rotation = 180;
         }
         if (newY == enemy.bitmap.y && newX == enemy.bitmap.x) {
             enemy.currentNode = enemy.currentNode.next;
@@ -75,16 +81,18 @@ function moveToNext(enemy) {
         stage.update();
 
 
-
-        var hitCastle = collisionMethod(enemy.bitmap, base);
-        if (hitCastle) {
-            enemy.alive = false;
-            stage.removeChild(enemy.bitmap);
-            updateLife();
-        }
+        //Instead of setting this for each level, just have the base be at the end of the path
+        //The else block below is called when the path is finished, aka, the base
+        // var hitCastle = collisionMethod(enemy.bitmap, base);
+        // if (hitCastle) {
+        //     enemy.alive = false;
+        //     stage.removeChild(enemy.bitmap);
+        //     updateLife();
+        // }
     } else {
         stage.removeChild(enemy.bitmap);
         enemy.alive = false;
+        updateLife();
         //enemy reached end
     }
 

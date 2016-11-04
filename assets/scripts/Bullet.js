@@ -74,6 +74,8 @@ Bullet.prototype.update = function () {
                 if (enem.health <= 0) {
                     stage.removeChild(enem.bitmap);
                     enem.alive = false;
+
+                    createjs.Sound.play("deathSound");
                     updateScore();
                 }
                 en = enemies.length;

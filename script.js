@@ -10,6 +10,7 @@ var towers = [];
 var bullets = [];
 var enemies = [];
 var score;
+var heart;
 var startTime;
 var gamestate;
 var tickerRunning = false;
@@ -18,6 +19,7 @@ var enemyCount = 0;
 var ticksBetweenSpawns = 50;
 var collisionMethod;
 var selectedTower;
+var levels = [];
 var GAMESTATES = {
     CONSTRUCT: 0,
     TITLE: 1,
@@ -78,6 +80,9 @@ function handleComplete() {
         src: "images/title.png",
         id: "title"
     }, {
+        src: "images/heart.png",
+        id: "heart"
+    }, {
         src: "images/instruction.png",
         id: "instruction"
     }, {
@@ -123,16 +128,49 @@ function handleComplete() {
         id: "base"
     }, {
         src: "images/towerDefense_tile118.png",
-        id: "groundTile"
+        id: "towerTileGrass"
     }, {
         src: "images/towerDefense_tile157.png",
-        id: "pathTile"
+        id: "pathTileGrass"
+    }, {
+        src: "images/towerDefense_tile054.png",
+        id: "towerTileDirt"
+    }, {
+        src: "images/towerDefense_tile158.png",
+        id: "pathTileDirt"
+    }, {
+        src: "images/towerDefense_tile159.png",
+        id: "pathTileSteel"
+    }, {
+        src: "images/towerDefense_tile197.png",
+        id: "towerTileSand"
+    }, {
+        src: "images/towerDefense_tile193.png",
+        id: "pathTileSand"
+    }, {
+        src: "images/towerDefense_tile261.png",
+        id: "towerTileSteel"
+    }, {
+        src: "images/towerDefense_tile245.png",
+        id: "enemySpriteGreen"
     }, {
         src: "images/towerDefense_tile246.png",
-        id: "enemySprite"
+        id: "enemySpriteGray"
+    }, {
+        src: "images/towerDefense_tile247.png",
+        id: "enemySpriteBrown"
+    }, {
+        src: "images/rocketAnimated.png",
+        id: "rocketAnimated"
+    }, {
+        src: "sounds/pain.mp3",
+        id: "deathSound"
     }];
 
+    createjs.Sound.alternateExtensions = ["mp3"];
     loader = new createjs.LoadQueue(true, "assets/");
+
+    loader.installPlugin(createjs.Sound);
     loader.addEventListener("complete", handleComplete);
     loader.loadManifest(manifest);
 
