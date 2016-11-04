@@ -1,7 +1,7 @@
 var CANVAS_HEIGHT = 600;
 var CANVAS_WIDTH = 800;
 var FPS = 30;
-var titleScreen, backgroundScreen, instructionScreen, gameoverScreen;
+var titleScreen, backgroundScreen, instructionScreen, gameoverScreen, trans;
 var groundTile, pathTile;
 var redTowerStore, greenTowerStore, blueTowerStore, store, base;
 var inBtn, menuBtn, playBtn;
@@ -21,6 +21,7 @@ var collisionMethod;
 var selectedTower;
 var pathSpots = [];
 var levels = [];
+var dom = false
 var levelNum = 0;
 var GAMESTATES = {
     CONSTRUCT: 0,
@@ -86,6 +87,9 @@ function handleComplete() {
         src: "images/heart.png",
         id: "heart"
     }, {
+        src: "images/trans.png",
+        id: "trans"
+    }, {
         src: "images/instruction.png",
         id: "instruction"
     }, {
@@ -106,12 +110,10 @@ function handleComplete() {
     }, {
         src: "images/tower0.png",
         id: "tower"
-    },
-    {
+    }, {
         src: "images/tower1.png",
         id: "tower-red"
-    },
-    {
+    }, {
         src: "images/bullet1.png",
         id: "bullet"
     }, {
@@ -155,6 +157,9 @@ function handleComplete() {
         id: "towerTileSteel"
     }, {
         src: "images/enemyDom.png",
+        id: "domBeatty"
+    }, {
+        src: "images/towerDefense_tile245.png",
         id: "enemySpriteGreen"
     }, {
         src: "images/towerDefense_tile246.png",
@@ -167,6 +172,12 @@ function handleComplete() {
         id: "rocketAnimated"
     }, {
         src: "sounds/dom.mp3",
+        id: "domSound"
+    }, {
+        src: "sounds/intro.mp3",
+        id: "intro"
+    }, {
+        src: "sounds/pain.mp3",
         id: "deathSound"
     }];
 

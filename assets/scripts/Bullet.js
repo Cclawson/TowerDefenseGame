@@ -1,4 +1,4 @@
-var Bullet = function (bulletBitmap) {
+var Bullet = function(bulletBitmap) {
     this.parent;
     this.startX = bulletBitmap.x - 32;
     this.startY = bulletBitmap.y - 32;
@@ -13,18 +13,18 @@ var Bullet = function (bulletBitmap) {
     this.cooldown = 0;
 }
 
-Bullet.prototype.draw = function () {
+Bullet.prototype.draw = function() {
     if (!this.hasBeenDrawn) {
         stage.addChild(this.bulletBitmap);
         this.hasBeenDrawn = true;
     }
 };
 
-Bullet.prototype.setParent = function (tower) {
+Bullet.prototype.setParent = function(tower) {
     this.parent = tower;
 }
 
-Bullet.prototype.update = function () {
+Bullet.prototype.update = function() {
     var enemyobj;
     for (var ene = 0; ene < enemies.length; ene++) {
         var enem = enemies[ene];
@@ -75,7 +75,12 @@ Bullet.prototype.update = function () {
                     stage.removeChild(enem.bitmap);
                     enem.alive = false;
 
-                    createjs.Sound.play("deathSound");
+                    if (dom) {
+                        createjs.Sound.play("domSound")
+                    } else {
+                        createjs.Sound.play("deathSound");
+
+                    }
                     updateScore();
                 }
                 en = enemies.length;
@@ -103,12 +108,12 @@ Bullet.prototype.update = function () {
     }
 };
 
-Bullet.prototype.inBounds = function () {
+Bullet.prototype.inBounds = function() {
     return this.bulletBitmap.x >= (this.parent.img.x - this.parent.range) && this.bulletBitmap.x <= (this.parent.img.x + this.parent.range) &&
         this.bulletBitmap.y >= (this.parent.img.y - this.parent.range) && this.bulletBitmap.y <= (this.parent.img.y + this.parent.range)
 }
 
-Bullet.prototype.checkEnemyDetection = function (enemy) {
+Bullet.prototype.checkEnemyDetection = function(enemy) {
     return enemy.bitmap.x >= (this.parent.img.x - this.parent.range - 32) && enemy.bitmap.x <= (this.parent.img.x + this.parent.range + 32) &&
         enemy.bitmap.y >= (this.parent.img.y - this.parent.range - 32) && enemy.bitmap.y <= (this.parent.img.y + this.parent.range)
 }

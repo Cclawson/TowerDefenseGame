@@ -7,6 +7,7 @@ function buildAll() {
     titleScreen = new createjs.Bitmap(loader.getResult("title"));
     instructionScreen = new createjs.Bitmap(loader.getResult("instruction"));
     backgroundScreen = new createjs.Bitmap(loader.getResult("bg"));
+    trans = new createjs.Bitmap(loader.getResult("trans"));
 
     gameoverScreen = new createjs.Bitmap(loader.getResult("gameover"));
 
@@ -33,7 +34,7 @@ function buildAll() {
     redTowerStore.x = 585;
     redTowerStore.y = 200;
 
-    redTowerStore.on("click", function () {
+    redTowerStore.on("click", function() {
         if (selectedTower) {
             buyRedUpgrade();
         }
@@ -51,6 +52,9 @@ function buildAll() {
     titleScreen.x = 0;
     titleScreen.y = 0;
 
+    trans.x = 0;
+    trans.y = 0;
+
     instructionScreen.x = 0;
     instructionScreen.y = 0;
 
@@ -65,7 +69,7 @@ function buildAll() {
     inBtn.x = 650;
     inBtn.y = 500;
 
-    inBtn.on("click", function (evt) {
+    inBtn.on("click", function(evt) {
         hideAll();
         showInstructions();
     });
@@ -74,7 +78,7 @@ function buildAll() {
     menuBtn.x = 650;
     menuBtn.y = 500;
 
-    menuBtn.on("click", function (evt) {
+    menuBtn.on("click", function(evt) {
         hideAll();
         showTitle();
     })
@@ -83,14 +87,14 @@ function buildAll() {
     playBtn.x = 530
     playBtn.y = 500;
 
-    playBtn.on("click", function (evt) {
+    playBtn.on("click", function(evt) {
         hideAll();
         gamestate = GAMESTATES.STARTGAME;
     });
 
-    continueBtn.x = 200;
-    continueBtn.y = 200;
-    continueBtn.on("click", function (evt) {
+    continueBtn.x = 530;
+    continueBtn.y = 500;
+    continueBtn.on("click", function(evt) {
         startLevel();
     })
 
@@ -122,6 +126,7 @@ function buildAll() {
     buildMap(levels[levelNum]);
     stage.addChild(titleScreen);
     stage.addChild(instructionScreen);
+    stage.addChild(trans);
     stage.addChild(gameoverScreen);
     stage.addChild(playBtn);
     stage.addChild(inBtn);
@@ -359,11 +364,11 @@ function buildMap(level) {
         map[towerSpot[0]][towerSpot[1]] = towerTile.clone();
         map[towerSpot[0]][towerSpot[1]].y = towerSpot[1] * 64;
         map[towerSpot[0]][towerSpot[1]].x = towerSpot[0] * 64;
-        map[towerSpot[0]][towerSpot[1]].on("click", function (x, y) {
-            return function () {
+        map[towerSpot[0]][towerSpot[1]].on("click", function(x, y) {
+            return function() {
                 addTower(x * 64, y * 64);
             }
-        } (towerSpot[0], towerSpot[1]));
+        }(towerSpot[0], towerSpot[1]));
         stage.addChild(map[towerSpot[0]][towerSpot[1]]);
     }
 
@@ -377,7 +382,7 @@ function buildMap(level) {
 
 function isPathPoint(i, j, pathPoints) {
     var isPathPoint = false;
-    pathPoints.forEach(function (point) {
+    pathPoints.forEach(function(point) {
         if (point[0] == i && point[1] == j) {
             isPathPoint = true;
         }
@@ -389,7 +394,7 @@ function buildSprite() {
 
 }
 
-function displaySprites() { }
+function displaySprites() {}
 
 function hideAll() {
     instructionScreen.visible = false;
@@ -410,6 +415,7 @@ function hideAll() {
     store.visible = false;
     base.visible = false;
     heart.visible = false;
+    trans.visible = false;
     hideMap();
 }
 
