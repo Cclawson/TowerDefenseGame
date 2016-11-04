@@ -154,7 +154,7 @@ function handleComplete() {
         src: "images/towerDefense_tile261.png",
         id: "towerTileSteel"
     }, {
-        src: "images/towerDefense_tile245.png",
+        src: "images/enemyDom.png",
         id: "enemySpriteGreen"
     }, {
         src: "images/towerDefense_tile246.png",
@@ -166,7 +166,7 @@ function handleComplete() {
         src: "images/rocketAnimated.png",
         id: "rocketAnimated"
     }, {
-        src: "sounds/pain.mp3",
+        src: "sounds/dom.mp3",
         id: "deathSound"
     }];
 

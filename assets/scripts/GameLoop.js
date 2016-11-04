@@ -21,17 +21,15 @@ function loop() {
         case GAMESTATES.NEXTLEVEL:
             reset()
             levelNum++;
-            if (levelNum > levels.length - 1) {
-                gamestate = GAMESTATES.GAMEOVER;
-            } else {
-                buildMap(levels[levelNum]);
-                hideMap();
-                showLevelTransition();
-                gamestate = GAMESTATES.HOLD;
-            }
+            buildMap(levels[levelNum]);
+            hideMap();
+            showLevelTransition();
+            gamestate = GAMESTATES.HOLD;
             //Pause here to show level transition screen. Continue button triggers startlevel
             break;
         case GAMESTATES.GAMEOVER:
+            reset();
+            levelNum = 0;
             hideAll();
             showGameOver();
             gamestate = GAMESTATES.HOLD;
