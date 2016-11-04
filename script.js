@@ -21,7 +21,7 @@ var collisionMethod;
 var selectedTower;
 var pathSpots = [];
 var levels = [];
-var levelNum = 0;
+var levelNum = 2;
 var GAMESTATES = {
     CONSTRUCT: 0,
     TITLE: 1,
@@ -168,6 +168,9 @@ function handleComplete() {
     }, {
         src: "sounds/dom.mp3",
         id: "deathSound"
+    }, {
+        src: "images/win.png",
+        id: "winscreen"
     }];
 
     createjs.Sound.alternateExtensions = ["mp3"];

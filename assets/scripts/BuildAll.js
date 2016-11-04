@@ -7,6 +7,7 @@ function buildAll() {
     titleScreen = new createjs.Bitmap(loader.getResult("title"));
     instructionScreen = new createjs.Bitmap(loader.getResult("instruction"));
     backgroundScreen = new createjs.Bitmap(loader.getResult("bg"));
+    winScreen = new createjs.Bitmap(loader.getResult("winscreen"));
 
     gameoverScreen = new createjs.Bitmap(loader.getResult("gameover"));
 
@@ -91,6 +92,7 @@ function buildAll() {
     continueBtn.x = 200;
     continueBtn.y = 200;
     continueBtn.on("click", function (evt) {
+        showMap();
         startLevel();
     })
 
@@ -123,10 +125,11 @@ function buildAll() {
     stage.addChild(titleScreen);
     stage.addChild(instructionScreen);
     stage.addChild(gameoverScreen);
+    stage.addChild(winScreen);
     stage.addChild(playBtn);
     stage.addChild(inBtn);
-    stage.addChild(menuBtn);
     stage.addChild(continueBtn);
+    stage.addChild(menuBtn);
     stage.addChild(timertext);
     stage.addChild(store);
     stage.addChild(scoretext);
@@ -410,6 +413,7 @@ function hideAll() {
     store.visible = false;
     base.visible = false;
     heart.visible = false;
+    winScreen.visible = false;
     hideMap();
 }
 
