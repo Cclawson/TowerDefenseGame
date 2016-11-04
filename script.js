@@ -18,7 +18,10 @@ var tickCount = 0;
 var enemyCount = 0;
 var ticksBetweenSpawns = 50;
 var collisionMethod;
+var selectedTower;
+var pathSpots = [];
 var levels = [];
+var levelNum = 0;
 var GAMESTATES = {
     CONSTRUCT: 0,
     TITLE: 1,
@@ -26,7 +29,8 @@ var GAMESTATES = {
     STARTGAME: 3,
     INGAME: 4,
     GAMEOVER: 5,
-    HOLD: 6
+    HOLD: 6,
+    NEXTLEVEL: 7,
 }
 var stage, loader;
 
@@ -100,9 +104,14 @@ function handleComplete() {
         src: "images/playButton.png",
         id: "playBtn"
     }, {
-        src: "images/tower1.png",
+        src: "images/tower0.png",
         id: "tower"
-    }, {
+    },
+    {
+        src: "images/tower1.png",
+        id: "tower-red"
+    },
+    {
         src: "images/bullet1.png",
         id: "bullet"
     }, {
@@ -160,7 +169,6 @@ function handleComplete() {
         src: "sounds/dom.mp3",
         id: "deathSound"
     }];
-
 
     createjs.Sound.alternateExtensions = ["mp3"];
     loader = new createjs.LoadQueue(true, "assets/");

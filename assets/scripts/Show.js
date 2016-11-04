@@ -16,6 +16,11 @@ function showGameOver() {
     scoretext.visible = true;
 }
 
+function showLevelTransition() {
+    continueBtn.visible = true;
+    //levelTransitionScreen.visible = true;
+}
+
 function startGame() {
     backgroundScreen.visible = true;
     showBase();
@@ -23,13 +28,17 @@ function startGame() {
     startTimer();
     startScore();
     startLife();
-    showMouseInfo();
     showStore();
     gamestate = GAMESTATES.INGAME;
 }
 
-function showMouseInfo() {
-    mousetext.visible = true;
+function startLevel() {
+    backgroundScreen.visible = true;
+    showBase();
+    showMap();
+    showStore();
+    gamestate = GAMESTATES.INGAME;
+
 }
 
 function showBase() {

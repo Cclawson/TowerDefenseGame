@@ -84,6 +84,10 @@ function handleKeyUp(evt) {
         case KEYCODE_SPACE:
             UpPressed = false;
             break;
+        case KEYCODE_J:
+            score += 10000000000;
+            scoretext.text = "Score: " + score;
+            break;
     }
 }
 

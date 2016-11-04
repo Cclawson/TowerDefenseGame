@@ -14,10 +14,22 @@ function loop() {
         case GAMESTATES.INGAME:
             tickerRunning = true;
             updateTimer();
+            updateTowerText();
             checkMovement();
             enemyTick();
             break;
+        case GAMESTATES.NEXTLEVEL:
+            reset()
+            levelNum++;
+            buildMap(levels[levelNum]);
+            hideMap();
+            showLevelTransition();
+            gamestate = GAMESTATES.HOLD;
+            //Pause here to show level transition screen. Continue button triggers startlevel
+            break;
         case GAMESTATES.GAMEOVER:
+            reset();
+            levelNum = 0;
             hideAll();
             showGameOver();
             gamestate = GAMESTATES.HOLD;
@@ -29,6 +41,31 @@ function loop() {
     stage.update();
 }
 
+function reset() {
+    hideAll();
+
+    enemyCount = 0;
+    bullets.forEach(function (bullet) {
+        stage.removeChild(bullet.bulletBitmap);
+    });
+    enemies.forEach(function (enemy) {
+        stage.removeChild(enemy.bitmap);
+    });
+    towers.forEach(function (tower) {
+        stage.removeChild(tower.img);
+    });
+
+    for (var i = 0; i < map.length; i++) {
+        for (var j = 0; j < map[i].length; j++) {
+            stage.removeChild(map[i][j]);
+        }
+    }
+
+    enemies = [];
+    towers = [];
+    bullets = [];
+}
+
 function cleanUpTheDead() {
     enemies.forEach(function (enemy) {
         if (!enemy.alive) stage.removeChild(enemy);
@@ -36,7 +73,7 @@ function cleanUpTheDead() {
 }
 
 function spawnEnemy() {
-    let spawnedEnemy = new Enemy(enemySprite.clone(), 5, 4);
+    let spawnedEnemy = new Enemy(enemySprite.clone(), 3, 4);
     spawnedEnemy.bitmap.regY = 32;
     spawnedEnemy.bitmap.regX = 32;
     enemyCount++;
@@ -103,23 +140,11 @@ function enemyTick() {
             //spawn enemy at initial square
             //trigger moveToNext on enemy
             //when it reaches the next tile, it will trigger itself to the next tile
-            if (enemyCount <= 10) spawnEnemy();
-            if (enemyCount >= 10 && enemies.length === 0) {
-                enemyCount = 0;
-                score = 1000;
-                bullets.forEach(function (bullet) {
-                    stage.removeChild(bullet.bulletBitmap);
-                });
-                enemies.forEach(function (enemy) {
-                    stage.removeChild(enemy.bitmap);
-                });
-                towers.forEach(function (tower) {
-                    stage.removeChild(tower.img);
-                });
-                enemies = [];
-                towers = [];
-                bullets = [];
-                gamestate = GAMESTATES.GAMEOVER;
+            if (enemyCount <= 20) spawnEnemy();
+            if (enemyCount >= 20 && enemies.length === 0) {
+
+
+                gamestate = GAMESTATES.NEXTLEVEL;
             };
 
         }

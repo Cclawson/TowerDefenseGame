@@ -1,7 +1,7 @@
-highlight the tower location.
-upgrade tower location to have a tower.
 upgrade the tower for better stats.
-??pathing for kyle
-base object (player)
-shooting for tower needs to be synced across all towers, towers need to shoot within their range.
- 
+graphics
+add specific tower points
+win screen
+sounds
+easter egg
+j 

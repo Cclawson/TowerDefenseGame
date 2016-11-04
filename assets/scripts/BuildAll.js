@@ -13,6 +13,7 @@ function buildAll() {
     inBtn = new createjs.Bitmap(loader.getResult("inBtn"));
     menuBtn = new createjs.Bitmap(loader.getResult("menuBtn"));
     playBtn = new createjs.Bitmap(loader.getResult("playBtn"));
+    continueBtn = new createjs.Bitmap(loader.getResult("playBtn"));
 
     tower = new createjs.Bitmap(loader.getResult("tower"));
     bullet = new createjs.Bitmap(loader.getResult("bullet"));
@@ -31,6 +32,12 @@ function buildAll() {
 
     redTowerStore.x = 585;
     redTowerStore.y = 200;
+
+    redTowerStore.on("click", function () {
+        if (selectedTower) {
+            buyRedUpgrade();
+        }
+    })
 
     blueTowerStore.x = 585;
     blueTowerStore.y = 310;
@@ -58,7 +65,7 @@ function buildAll() {
     inBtn.x = 650;
     inBtn.y = 500;
 
-    inBtn.on("click", function(evt) {
+    inBtn.on("click", function (evt) {
         hideAll();
         showInstructions();
     });
@@ -67,7 +74,7 @@ function buildAll() {
     menuBtn.x = 650;
     menuBtn.y = 500;
 
-    menuBtn.on("click", function(evt) {
+    menuBtn.on("click", function (evt) {
         hideAll();
         showTitle();
     })
@@ -76,9 +83,15 @@ function buildAll() {
     playBtn.x = 530
     playBtn.y = 500;
 
-    playBtn.on("click", function(evt) {
+    playBtn.on("click", function (evt) {
         hideAll();
         gamestate = GAMESTATES.STARTGAME;
+    });
+
+    continueBtn.x = 200;
+    continueBtn.y = 200;
+    continueBtn.on("click", function (evt) {
+        startLevel();
     })
 
     //text
@@ -95,9 +108,9 @@ function buildAll() {
     lifetext.x = 620;
     lifetext.y = 50;
 
-    mousetext = new createjs.Text("", "20px Arial", "#000");
-    mousetext.x = 50;
-    mousetext.y = 100;
+    towertext = new createjs.Text("", "20px Arial", "#000");
+    towertext.x = 585;
+    towertext.y = 130;
 
 
     heart.x = 605;
@@ -106,26 +119,27 @@ function buildAll() {
     //append to stage
     stage.addChild(backgroundScreen);
     initLevels();
-    buildMap(levels[1]);
+    buildMap(levels[levelNum]);
     stage.addChild(titleScreen);
     stage.addChild(instructionScreen);
     stage.addChild(gameoverScreen);
     stage.addChild(playBtn);
     stage.addChild(inBtn);
     stage.addChild(menuBtn);
+    stage.addChild(continueBtn);
     stage.addChild(timertext);
-    stage.addChild(mousetext);
     stage.addChild(store);
     stage.addChild(scoretext);
     stage.addChild(heart);
     stage.addChild(lifetext);
-
-    // stage.addChild(redTowerStore);
-    // stage.addChild(greenTowerStore);
-    // stage.addChild(blueTowerStore);
+    stage.addChild(towertext);
+    stage.addChild(redTowerStore);
+    stage.addChild(greenTowerStore);
+    stage.addChild(blueTowerStore);
     hideAll();
     showTitle();
 }
+
 
 function initLevels() {
     let levelOnePath = [
@@ -314,6 +328,7 @@ function buildMap(level) {
     pathTile = level.pathTile;
     towerTile = level.towerTile;
     path = new PathList();
+    pathSpots = [];
     let pathPoints = level.pathPoints;
 
     for (var i = 0; i < 9; i++) {
@@ -335,6 +350,7 @@ function buildMap(level) {
         nextTile.y = pathPoints[k][1] * 64;
         path.add(nextTile);
         stage.addChild(nextTile);
+        pathSpots.push(nextTile);
     }
 
     for (var i = 0; i < level.towerSpots.length; i++) {
@@ -343,11 +359,11 @@ function buildMap(level) {
         map[towerSpot[0]][towerSpot[1]] = towerTile.clone();
         map[towerSpot[0]][towerSpot[1]].y = towerSpot[1] * 64;
         map[towerSpot[0]][towerSpot[1]].x = towerSpot[0] * 64;
-        map[towerSpot[0]][towerSpot[1]].on("click", function(x, y) {
-            return function() {
+        map[towerSpot[0]][towerSpot[1]].on("click", function (x, y) {
+            return function () {
                 addTower(x * 64, y * 64);
             }
-        }(towerSpot[0], towerSpot[1]));
+        } (towerSpot[0], towerSpot[1]));
         stage.addChild(map[towerSpot[0]][towerSpot[1]]);
     }
 
@@ -356,11 +372,12 @@ function buildMap(level) {
     base.x = basePoint[0] * 64;
     base.y = basePoint[1] * 64;
     stage.addChild(base);
+
 }
 
 function isPathPoint(i, j, pathPoints) {
     var isPathPoint = false;
-    pathPoints.forEach(function(point) {
+    pathPoints.forEach(function (point) {
         if (point[0] == i && point[1] == j) {
             isPathPoint = true;
         }
@@ -372,20 +389,21 @@ function buildSprite() {
 
 }
 
-function displaySprites() {}
+function displaySprites() { }
 
 function hideAll() {
     instructionScreen.visible = false;
     inBtn.visible = false;
     titleScreen.visible = false;
     menuBtn.visible = false;
+    continueBtn.visible = false;
     backgroundScreen.visible = false;
     gameoverScreen.visible = false;
     playBtn.visible = false;
     timertext.visible = false;
     lifetext.visible = false;
     scoretext.visible = false;
-    mousetext.visible = false;
+    towertext.visible = false;
     blueTowerStore.visible = false;
     redTowerStore.visible = false;
     greenTowerStore.visible = false;
@@ -403,6 +421,10 @@ function hideMap() {
             }
         }
     }
+
+    for (var i = 0; i < pathSpots.length; i++) {
+        pathSpots[i].visible = false;
+    }
 }
 
 function showMap() {
@@ -413,13 +435,19 @@ function showMap() {
             }
         }
     }
+
+    for (var i = 0; i < pathSpots.length; i++) {
+        pathSpots[i].visible = true;
+    }
 }
 
 function addTower(x, y) {
     if (score - 300 >= 0) {
         var tow = tower.clone();
-        tow.x = x;
-        tow.y = y;
+        tow.x = x + 32;
+        tow.y = y + 32;
+        tow.regX = tow.image.width / 2;
+        tow.regY = tow.image.height / 2;
         var canplace = true;
         for (var tn = 0; tn < towers.length; tn++) {
             if (tow.x === towers[tn].img.x && tow.y === towers[tn].img.y) {
@@ -435,9 +463,8 @@ function addTower(x, y) {
 
             var b = new Bullet(bull);
 
-            var t = new Tower(tow, b, 100, 6);
+            var t = new Tower(tow, b, 80, 6);
             stage.addChild(tow);
-
             towers.push(t);
         }
 
