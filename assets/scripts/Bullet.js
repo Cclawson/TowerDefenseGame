@@ -1,7 +1,7 @@
 var Bullet = function (bulletBitmap) {
     this.parent;
-    this.startX = bulletBitmap.x;
-    this.startY = bulletBitmap.y;
+    this.startX = bulletBitmap.x - 32;
+    this.startY = bulletBitmap.y - 32;
     this.bulletBitmap = bulletBitmap;
     this.active = false;
     this.xVelocity = 5;
@@ -36,7 +36,7 @@ Bullet.prototype.update = function () {
     if (enemyobj && this.cooldown <= 0) {
         this.bulletBitmap.visible = true;
         var enemy = enemyobj.bitmap;
-        var angle = Math.atan2(enemy.y - this.bulletBitmap.y, enemy.x - this.bulletBitmap.x);
+        var angle = Math.atan2(enemy.y - this.bulletBitmap.y - 32, enemy.x - this.bulletBitmap.x - 32);
         angle = toDegrees(angle);
         //this.parent.img.rotation = angle;
         //  if (!this.active) {
