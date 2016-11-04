@@ -64,7 +64,7 @@ function buildAll() {
     inBtn.x = 650;
     inBtn.y = 500;
 
-    inBtn.on("click", function(evt) {
+    inBtn.on("click", function (evt) {
         hideAll();
         showInstructions();
     });
@@ -73,7 +73,7 @@ function buildAll() {
     menuBtn.x = 650;
     menuBtn.y = 500;
 
-    menuBtn.on("click", function(evt) {
+    menuBtn.on("click", function (evt) {
         hideAll();
         showTitle();
     })
@@ -82,7 +82,7 @@ function buildAll() {
     playBtn.x = 530
     playBtn.y = 500;
 
-    playBtn.on("click", function(evt) {
+    playBtn.on("click", function (evt) {
         hideAll();
         gamestate = GAMESTATES.STARTGAME;
     })
@@ -112,7 +112,7 @@ function buildAll() {
     //append to stage
     stage.addChild(backgroundScreen);
     initLevels();
-    buildMap(levels[1]);
+    buildMap(levels[levelNum]);
     stage.addChild(titleScreen);
     stage.addChild(instructionScreen);
     stage.addChild(gameoverScreen);
@@ -131,6 +131,7 @@ function buildAll() {
     hideAll();
     showTitle();
 }
+
 
 function initLevels() {
     let levelOnePath = [
@@ -348,11 +349,11 @@ function buildMap(level) {
         map[towerSpot[0]][towerSpot[1]] = towerTile.clone();
         map[towerSpot[0]][towerSpot[1]].y = towerSpot[1] * 64;
         map[towerSpot[0]][towerSpot[1]].x = towerSpot[0] * 64;
-        map[towerSpot[0]][towerSpot[1]].on("click", function(x, y) {
-            return function() {
+        map[towerSpot[0]][towerSpot[1]].on("click", function (x, y) {
+            return function () {
                 addTower(x * 64, y * 64);
             }
-        }(towerSpot[0], towerSpot[1]));
+        } (towerSpot[0], towerSpot[1]));
         stage.addChild(map[towerSpot[0]][towerSpot[1]]);
     }
 
@@ -365,7 +366,7 @@ function buildMap(level) {
 
 function isPathPoint(i, j, pathPoints) {
     var isPathPoint = false;
-    pathPoints.forEach(function(point) {
+    pathPoints.forEach(function (point) {
         if (point[0] == i && point[1] == j) {
             isPathPoint = true;
         }
@@ -377,7 +378,7 @@ function buildSprite() {
 
 }
 
-function displaySprites() {}
+function displaySprites() { }
 
 function hideAll() {
     instructionScreen.visible = false;

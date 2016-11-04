@@ -20,6 +20,7 @@ var ticksBetweenSpawns = 50;
 var collisionMethod;
 var selectedTower;
 var levels = [];
+var levelNum = 0;
 var GAMESTATES = {
     CONSTRUCT: 0,
     TITLE: 1,
@@ -27,7 +28,8 @@ var GAMESTATES = {
     STARTGAME: 3,
     INGAME: 4,
     GAMEOVER: 5,
-    HOLD: 6
+    HOLD: 6,
+    NEXTLEVEL: 7,
 }
 var stage, loader;
 

@@ -18,6 +18,13 @@ function loop() {
             checkMovement();
             enemyTick();
             break;
+        case GAMESTATES.NEXTLEVEL:
+            reset()
+            levelNum++;
+            buildMap(levels[levelNum]);
+            //Pause here to show level transition screen. Continue button triggers startlevel
+            startLevel();
+            break;
         case GAMESTATES.GAMEOVER:
             hideAll();
             showGameOver();
@@ -28,6 +35,25 @@ function loop() {
     }
 
     stage.update();
+}
+
+function reset() {
+    hideAll();
+
+    enemyCount = 0;
+    bullets.forEach(function (bullet) {
+        stage.removeChild(bullet.bulletBitmap);
+    });
+    enemies.forEach(function (enemy) {
+        stage.removeChild(enemy.bitmap);
+    });
+    towers.forEach(function (tower) {
+        stage.removeChild(tower.img);
+    });
+
+    enemies = [];
+    towers = [];
+    bullets = [];
 }
 
 function cleanUpTheDead() {
@@ -104,23 +130,11 @@ function enemyTick() {
             //spawn enemy at initial square
             //trigger moveToNext on enemy
             //when it reaches the next tile, it will trigger itself to the next tile
-            if (enemyCount <= 10) spawnEnemy();
-            if (enemyCount >= 10 && enemies.length === 0) {
-                enemyCount = 0;
-                score = 1000;
-                bullets.forEach(function (bullet) {
-                    stage.removeChild(bullet.bulletBitmap);
-                });
-                enemies.forEach(function (enemy) {
-                    stage.removeChild(enemy.bitmap);
-                });
-                towers.forEach(function (tower) {
-                    stage.removeChild(tower.img);
-                });
-                enemies = [];
-                towers = [];
-                bullets = [];
-                gamestate = GAMESTATES.GAMEOVER;
+            if (enemyCount <= 20) spawnEnemy();
+            if (enemyCount >= 20 && enemies.length === 0) {
+
+
+                gamestate = GAMESTATES.NEXTLEVEL;
             };
 
         }

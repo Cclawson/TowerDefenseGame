@@ -27,6 +27,15 @@ function startGame() {
     gamestate = GAMESTATES.INGAME;
 }
 
+function startLevel() {
+    backgroundScreen.visible = true;
+    showBase();
+    showMap();
+    showStore();
+    gamestate = GAMESTATES.INGAME;
+
+}
+
 function showBase() {
     base.visible = true;
 }
